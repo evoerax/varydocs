@@ -1,0 +1,28 @@
+.dt-shell[data-doc-theme="minimal"] { container: docs-minimal / inline-size; }
+
+.dt-layout-minimal { grid-template-columns: minmax(9rem, .85fr) minmax(0, 3fr) minmax(8rem, .75fr); }
+.dt-shell[data-embedded="true"] .dt-layout-minimal { grid-template-columns: minmax(8rem, 1fr) minmax(0, 3fr); }
+.dt-shell[data-embedded="true"] .dt-layout-minimal > .dt-outline { display: none; }
+
+@container docs-minimal (max-width: 950px) {
+  .dt-layout-minimal { grid-template-columns: minmax(9rem, 1fr) minmax(0, 3fr); }
+  .dt-layout-minimal > .dt-outline { display: none; }
+}
+@container docs-minimal (max-width: 580px) {
+  .dt-layout-minimal, .dt-shell[data-embedded="true"] .dt-layout-minimal { grid-template-columns: minmax(0, 1fr); }
+  .dt-layout-minimal { gap: 1.2rem; padding-block-start: 1.2rem; }
+  .dt-layout-minimal > .dt-sidebar > .dt-desktop-menu { display: none; }
+  .dt-layout-minimal > .dt-sidebar > .dt-mobile-menu {
+    display: block;
+    border: 1px solid var(--dt-line);
+    border-radius: var(--dt-radius);
+  }
+  .dt-layout-minimal .dt-mobile-menu summary { cursor: pointer; padding: .4rem .65rem; }
+  .dt-layout-minimal .dt-mobile-menu nav { padding: .35rem .65rem .65rem; }
+}
+
+@container docs-minimal (min-width: 440px) and (max-width: 580px) {
+  .dt-shell[data-embedded="true"] .dt-layout-minimal { grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr); }
+  .dt-shell[data-embedded="true"] .dt-layout-minimal .dt-desktop-menu { display: block; }
+  .dt-shell[data-embedded="true"] .dt-layout-minimal .dt-mobile-menu { display: none; }
+}

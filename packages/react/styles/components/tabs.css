@@ -1,0 +1,9 @@
+.dt-tabs { border: 1px solid var(--dt-line, #dbe2eb); border-radius: var(--dt-radius, .5rem); }
+.dt-tabs [role="tablist"] { display: flex; gap: .65rem; padding: 0 .75rem; border-bottom: 1px solid var(--dt-line, #dbe2eb); overflow-x: auto; }
+.dt-tabs [role="tab"] { border: 0; border-bottom: 2px solid transparent; padding: .45rem .25rem; color: var(--dt-muted, #526175); background: transparent; cursor: pointer; white-space: nowrap; }
+.dt-tabs [aria-selected="true"] { border-bottom-color: var(--dt-accent, #223ed8); color: var(--dt-accent, #223ed8); }
+.dt-tabs [role="tabpanel"] { padding: .25rem .75rem; }
+
+.dt-tabs [role="tab"] { font: inherit; }
+.dt-tabs :focus-visible { outline: 2px solid var(--dt-accent, #223ed8); outline-offset: -2px; }
+.dt-tabs [role="tabpanel"][hidden] { display: none; }

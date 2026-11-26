@@ -1,0 +1,10 @@
+.dt-callout {
+  margin: 1.25rem 0;
+  padding: .85rem 1rem;
+  border: 1px solid var(--dt-line, #dbe2eb);
+  border-left: 3px solid var(--dt-accent, #223ed8);
+  border-radius: var(--dt-radius, .5rem);
+  background: var(--dt-panel, #f1f4f7);
+}
+.dt-callout p:first-child { margin-top: .25rem; }
+.dt-callout div > :last-child { margin-bottom: 0; }

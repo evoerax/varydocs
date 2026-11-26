@@ -1,0 +1,29 @@
+{
+  "name": "varydocs-workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.31.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build:packages": "pnpm --filter \"./packages/**\" -r build",
+    "dev": "pnpm build:packages && pnpm --filter @varydocs/vite-example dev",
+    "dev:gta6": "pnpm build:packages && pnpm --filter @varydocs/gta6-example dev",
+    "build": "pnpm build:packages && pnpm --filter \"./examples/**\" -r build",
+    "create:local": "pnpm pack:local && node packages/cli/bin/varydocs.js init --local-packages .varydocs/packs",
+    "test": "pnpm build:packages && node --test tests/*.test.mjs",
+    "pack:local": "pnpm build:packages && pnpm --filter \"./packages/**\" -r pack --pack-destination .varydocs/packs",
+    "check:pack": "node scripts/check-packs.mjs",
+    "qa:reader": "node scripts/verify-reader.mjs",
+    "qa:search": "node scripts/verify-search-load.mjs",
+    "bench:release": "node scripts/measure-release.mjs"
+  },
+  "devDependencies": {
+    "@ai-sdk/openai-compatible": "3.0.94",
+    "@types/node": "^24.0.0",
+    "axe-core": "4.14.1",
+    "playwright": "1.65.1",
+    "typescript": "~5.9.3"
+  }
+}

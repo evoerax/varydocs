@@ -1,0 +1,58 @@
+---
+title: 风格与组件
+description: 为同一份内容选择布局，并用文档组件组织页面。
+---
+
+## 切换风格
+
+建站向导提供六种通用风格（`minimal`、`editorial`、`terminal`、`swiss`、`brutalism`、`blueprint`）和两种主题风格（`gta6`、`desktop`）。在 `varydocs.json` 中将 `style` 设为对应的 ID 即可。
+
+复古桌面把文件树、文档搜索和代码块呈现为桌面窗口。按 `Command+K` 或 `Ctrl+K` 查找文档，用方向键选择结果，按回车打开。已有 CLI 项目可以在项目目录运行 `pnpm exec varydocs add style desktop` 切换。
+
+选择 GTA6，可以为文档配上描边标题、霓虹粉导航和暖纸色正文。
+
+普通正文可以用 Markdown。需要交互内容时，使用 MDX，在宿主应用里注册自定义组件并在文档里引用组件名。VaryDocs 支持字面量属性，文档中的 import 和 JavaScript 表达式会在构建时被拒绝。
+
+## 使用 MDX 组件
+
+在 MDX 中使用已注册的 Callout、Tabs、Tab、Steps 和 Step。组件属性使用文本等字面值。
+
+<Tabs>
+<Tab title="极简">
+
+展示简洁的默认文档布局。
+
+</Tab>
+<Tab title="编辑">
+
+长篇阅读布局使用相同的文档组件。
+
+</Tab>
+</Tabs>
+
+<Steps>
+<Step title="选择">
+
+根据内容类型选择风格。
+
+</Step>
+<Step title="验证">
+
+检查长文、短文以及移动端导航。
+
+</Step>
+</Steps>
+
+## 创建自定义布局
+
+主题提供 ID、Layout 组件和 MDX 组件映射。Layout 接收导航、正文和页内目录三个区域。把主题传给 React 渲染器或 Next.js 适配器，并按 data-doc-theme 属性定义样式。
+
+要自定义顶栏，可以给主题提供 `Header` 组件。在顶栏中渲染 `brand` 和 `actions`，即可保留站点首页链接、搜索和宿主应用传入的操作。`context.groups` 提供当前语言的导航链接，包含站点的部署路径前缀。
+
+以复古桌面为例，只加载一种内置主题时，从 `@varydocs/react/view` 引入 `DocsView`，把 `desktopTheme` 传给 `theme`，并引入对应样式。
+
+```tsx
+import { DocsView } from '@varydocs/react/view';
+import { desktopTheme } from '@varydocs/react/themes/desktop';
+import '@varydocs/react/themes/desktop.css';
+```

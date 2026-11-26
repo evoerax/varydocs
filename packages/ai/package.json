@@ -1,0 +1,32 @@
+{
+  "name": "@varydocs/ai",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evoerax/varydocs.git",
+    "directory": "packages/ai"
+  },
+  "bugs": {
+    "url": "https://github.com/evoerax/varydocs/issues"
+  },
+  "engines": { "node": ">=22.12" },
+  "files": ["dist", "styles.css"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./server": { "types": "./dist/server.d.ts", "import": "./dist/server.js" },
+    "./styles.css": "./styles.css"
+  },
+  "scripts": { "build": "tsc -p tsconfig.json" },
+  "dependencies": {
+    "@ai-sdk/react": "4.0.186",
+    "@varydocs/model": "workspace:*",
+    "ai": "7.0.181",
+    "zod": "^4.1.8"
+  },
+  "peerDependencies": { "react": "^19.2.1" },
+  "devDependencies": { "react": "19.2.8", "@types/react": "^19.2.0" },
+  "sideEffects": ["**/*.css"],
+  "publishConfig": { "access": "public" }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "@varydocs/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evoerax/varydocs.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/evoerax/varydocs/issues"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "bin"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "@varydocs/core": "workspace:*",
+    "chokidar": "^4.0.0",
+    "commander": "^14.0.0",
+    "jsonc-parser": "3.3.1"
+  },
+  "bin": {
+    "varydocs": "./bin/varydocs.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

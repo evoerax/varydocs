@@ -1,0 +1,10 @@
+.gta6-example-illustration {
+  max-inline-size: 32rem;
+  margin: 1.25rem 0;
+}
+
+.gta6-example-illustration img {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 3 / 1;
+}

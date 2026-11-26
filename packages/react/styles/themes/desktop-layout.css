@@ -1,0 +1,263 @@
+.dt-shell[data-doc-theme="desktop"] {
+  container: docs-desktop / inline-size;
+  --dt-bg: light-dark(#f9faf2, #192925);
+  --dt-panel: light-dark(#e7ebe0, #263934);
+  --dt-ink: light-dark(#1b302c, #e9eee4);
+  --dt-muted: light-dark(#4d615a, #b5c7be);
+  --dt-line: light-dark(#92a69c, #637d72);
+  --dt-accent: light-dark(#005c53, #9edbc3);
+  --dt-accent-soft: light-dark(#cfe8db, #32594e);
+  --dt-code-bg: light-dark(#eef2e7, #14221f);
+  --dt-radius: 3px;
+  --desktop-worktop: light-dark(#d6e3db, #152420);
+  --desktop-title: light-dark(#d4e4da, #304840);
+  --desktop-strong-line: light-dark(#617a70, #6e8c7f);
+  --desktop-raised: light-dark(#fffef5, #546c60);
+  --desktop-shadow: light-dark(#263f382b, #050e0ba6);
+  --desktop-yellow: light-dark(#e6b957, #f0c76a);
+}
+
+.dt-desktop-header {
+  min-height: 3.7rem;
+  background: var(--dt-panel);
+  border-bottom: 1px solid var(--desktop-strong-line);
+  box-shadow: inset 0 1px var(--desktop-raised);
+}
+.dt-desktop-brand { display: flex; align-items: center; gap: .65rem; min-width: 0; }
+.dt-desktop-brand .dt-brand { min-width: 0; overflow-wrap: anywhere; }
+.dt-desktop-app-icon {
+  flex: none;
+  width: 1.38rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--dt-ink);
+  border-radius: var(--dt-radius);
+  background: var(--desktop-yellow);
+  box-shadow: 2px 2px var(--desktop-strong-line), inset 0 2px #ffffff85;
+  display: grid;
+  place-items: center;
+}
+.dt-desktop-app-icon::before {
+  content: "";
+  width: .65rem;
+  height: .48rem;
+  border: 1px solid #24392f;
+  background: linear-gradient(#24392f 2px, transparent 2px);
+}
+
+.dt-shell[data-doc-theme="desktop"] {
+  background-color: var(--desktop-worktop);
+  background-image: radial-gradient(var(--desktop-shadow) .8px, transparent .9px);
+  background-size: 13px 13px;
+}
+.dt-layout-desktop {
+  grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr);
+  gap: clamp(1rem, 2.35cqi, 2rem);
+  max-width: 91rem;
+  padding: clamp(1.25rem, 3cqi, 2.8rem) clamp(1rem, 3.4cqi, 3rem) 4rem;
+}
+.dt-desktop-files, .dt-desktop-reader {
+  min-width: 0;
+  background: var(--dt-bg);
+  border: 1px solid var(--desktop-strong-line);
+  border-radius: var(--dt-radius);
+  box-shadow: 4px 5px 0 var(--desktop-shadow);
+}
+.dt-desktop-files { position: sticky; top: 1rem; background: var(--dt-panel); }
+.dt-desktop-titlebar {
+  min-height: 2.22rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .35rem .7rem;
+  color: var(--dt-ink);
+  background: var(--desktop-title);
+  border-bottom: 1px solid var(--desktop-strong-line);
+  box-shadow: inset 0 1px var(--desktop-raised);
+  font: 650 .825rem/1.4 var(--dt-font);
+}
+.dt-desktop-titlebar bdi {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--dt-mono);
+  font-weight: 500;
+}
+.dt-desktop-folder, .dt-desktop-file {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  border: 1px solid currentColor;
+}
+.dt-desktop-folder { width: .9rem; height: .59rem; background: var(--desktop-yellow); color: #28392f; }
+.dt-desktop-folder::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -.24rem;
+  inset-inline-start: -1px;
+  width: .45rem;
+  height: .24rem;
+  border: 1px solid;
+  border-block-end: 0;
+  background: inherit;
+}
+.dt-desktop-file { width: .62rem; height: .76rem; color: var(--dt-accent); border-radius: 1px; }
+.dt-desktop-file::after {
+  content: "";
+  position: absolute;
+  inset: .21rem .12rem;
+  border-block: 1px solid;
+}
+.dt-desktop-files .dt-desktop-menu {
+  position: static;
+  overflow: auto;
+  max-block-size: calc(100dvh - 6rem);
+  padding: .8rem .6rem 1rem;
+}
+.dt-desktop-files .dt-nav-group > p { padding-inline: .35rem; margin-block-end: .4rem; }
+.dt-desktop-files .dt-nav-group ul {
+  margin-inline-start: .52rem;
+  border-inline-start: 1px solid var(--dt-line);
+  padding-inline-start: .32rem;
+}
+.dt-desktop-files .dt-nav-group a { position: relative; padding-inline: 1.3rem .45rem; }
+.dt-desktop-files .dt-nav-group a::before {
+  content: "";
+  position: absolute;
+  inset: .6em auto auto .34rem;
+  inset-inline-start: .34rem;
+  width: .46rem;
+  height: .58rem;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+}
+.dt-desktop-files .dt-nav-group [aria-current] {
+  box-shadow: inset 0 0 0 1px var(--dt-accent);
+}
+.dt-desktop-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 2.25rem;
+  padding: clamp(1.15rem, 3.25cqi, 3.25rem);
+}
+.dt-desktop-content[data-outline] { grid-template-columns: minmax(0, 1fr) minmax(7.5rem, 10.5rem); }
+.dt-desktop-content .dt-page-title { font-size: clamp(1.95rem, 3.5cqi, 3.25rem); letter-spacing: -.042em; line-height: 1.12; }
+.dt-desktop-content .dt-article { width: 100%; max-width: 72ch; }
+.dt-desktop-content .dt-outline { position: sticky; top: 1rem; }
+
+.dt-desktop-command {
+  position: relative;
+  margin-block: 1rem;
+  border: 1px solid var(--desktop-strong-line);
+  border-radius: var(--dt-radius);
+  box-shadow: 2px 2px 0 var(--desktop-shadow);
+}
+.dt-desktop-command-title {
+  min-height: 2.18rem;
+  padding: .3rem .7rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--desktop-title);
+  border-bottom: 1px solid var(--desktop-strong-line);
+  box-shadow: inset 0 1px var(--desktop-raised);
+  color: var(--dt-muted);
+  font: 500 .78rem/1 var(--dt-mono);
+}
+.dt-desktop-command-title span { color: var(--dt-accent); font-size: 1rem; font-weight: 700; }
+.dt-desktop-command .dt-code-block { position: static; margin: 0; }
+.dt-desktop-command .dt-code-block pre { padding: .9rem .85rem; border: 0; border-radius: 0; }
+.dt-desktop-command .dt-copy {
+  top: .2rem;
+  right: auto;
+  inset-inline-end: .27rem;
+  padding: .13rem .4rem;
+  border-color: var(--desktop-strong-line);
+  background: var(--dt-bg);
+}
+
+.dt-shell[data-doc-theme="desktop"] .dt-search-button {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 2rem;
+  border-color: var(--desktop-strong-line);
+  color: var(--dt-ink);
+  box-shadow: inset 0 1px var(--desktop-raised), 1px 1px var(--desktop-shadow);
+}
+.dt-shell[data-doc-theme="desktop"] .dt-search-button::before {
+  content: "";
+  width: .67rem;
+  height: .67rem;
+  border: 1px solid;
+  border-radius: 50%;
+  box-shadow: .2rem .2rem 0 -.15rem currentColor;
+}
+.dt-shell[data-doc-theme="desktop"] .dt-search-button kbd { margin: 0; color: var(--dt-muted); }
+.dt-shell[data-doc-theme="desktop"] .dt-search {
+  padding: 0 0 .75rem;
+  border-color: var(--desktop-strong-line);
+  box-shadow: 5px 6px 0 var(--desktop-shadow), var(--dt-shadow);
+}
+.dt-shell[data-doc-theme="desktop"] .dt-search-top {
+  padding: .5rem .7rem;
+  min-height: 2.25rem;
+  border-bottom: 1px solid var(--desktop-strong-line);
+  box-shadow: inset 0 1px var(--desktop-raised);
+  background: var(--desktop-title);
+}
+.dt-shell[data-doc-theme="desktop"] .dt-search input {
+  width: calc(100% - 1.5rem);
+  margin-inline: .75rem;
+  border-color: var(--desktop-strong-line);
+  box-shadow: inset 1px 1px 0 var(--desktop-shadow);
+}
+.dt-shell[data-doc-theme="desktop"] .dt-search-results { margin-inline: .75rem; }
+
+@container docs-desktop (max-width: 68rem) {
+  .dt-desktop-content[data-outline] { grid-template-columns: minmax(0, 1fr); }
+  .dt-desktop-content .dt-outline { position: static; }
+}
+@container docs-desktop (max-width: 44rem) {
+  .dt-layout-desktop { grid-template-columns: minmax(0, 1fr); }
+  .dt-desktop-files { position: static; }
+  .dt-desktop-files .dt-desktop-titlebar, .dt-shell .dt-desktop-files .dt-desktop-menu { display: none; }
+  .dt-shell .dt-desktop-files .dt-mobile-menu { display: block; border: 0; }
+  .dt-desktop-header { flex-wrap: wrap; gap: .5rem; }
+  .dt-desktop-header .dt-header-actions { margin-inline-start: auto; }
+}
+
+.dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-layout-desktop {
+  --dt-reader-rail-gap: clamp(1.25rem, 3cqi, 2.8rem);
+}
+
+.dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-desktop-files {
+  position: var(--dt-reader-rail-position);
+  inset-block-start: var(--dt-reader-rail-start);
+  display: var(--dt-reader-rail-display);
+  flex-direction: column;
+  max-block-size: var(--dt-reader-rail-limit);
+}
+
+.dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-desktop-files .dt-sidebar {
+  position: static;
+  align-self: stretch;
+  min-block-size: 0;
+  max-block-size: none;
+}
+
+.dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-desktop-files .dt-desktop-menu {
+  max-block-size: var(--dt-reader-menu-limit, none);
+}
+
+.dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-desktop-files > .dt-desktop-titlebar {
+  flex: none;
+}
+
+.dt-shell[data-doc-layout="topbar"] .dt-desktop-content .dt-outline {
+  inset-block-start: var(--dt-reader-anchor-offset);
+}
+
+.dt-shell[data-doc-layout="sidebar"] .dt-desktop-files .dt-reader-sidebar-header .dt-header {
+  padding-inline: .65rem;
+}

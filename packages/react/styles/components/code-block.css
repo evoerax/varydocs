@@ -1,0 +1,15 @@
+@import "./copy-button.css";
+
+.dt-code-block { position: relative; margin: .9rem 0; }
+.dt-code-block pre {
+  overflow: auto;
+  margin: 0;
+  padding: 1rem 5.2rem 1rem 1rem;
+  border: 1px solid var(--dt-line, #dbe2eb);
+  border-radius: var(--dt-radius, .5rem);
+  background: var(--dt-code-bg, #f3f5f9);
+  font-family: var(--dt-mono, "SFMono-Regular", Consolas, "Liberation Mono", monospace);
+  line-height: 1.55;
+}
+.dt-code-block pre code { background: none; padding: 0; }
+.dt-code-block .dt-copy { position: absolute; top: .55rem; right: .55rem; z-index: 1; }

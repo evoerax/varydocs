@@ -1,0 +1,24 @@
+name: Bug report · 问题反馈
+description: Report a reproducible problem in VaryDocs SDKs, CLI or examples.
+title: "[Bug] "
+body:
+  - type: textarea
+    id: setup
+    attributes:
+      label: Environment · 环境
+      description: Include VaryDocs package versions, Node, package manager and framework. For a generated site, include template, style, locale and deployment prefix.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce · 复现步骤
+      description: Include the command, minimal document or imports and relevant config. Remove credentials from logs.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual behavior · 预期与实际结果
+    validations:
+      required: true

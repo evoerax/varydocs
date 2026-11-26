@@ -1,0 +1,58 @@
+---
+title: Styles and components
+description: Choose a layout, then compose pages from the same content blocks.
+---
+
+## Change a style
+
+The CLI wizard offers six general-purpose styles (`minimal`, `editorial`, `terminal`, `swiss`, `brutalism`, and `blueprint`) and two themed styles (`gta6` and `desktop`). Set any of these IDs as `style` in `varydocs.json`.
+
+Retro Desktop presents the file tree, search and code blocks as desktop windows. Press `Command+K` or `Ctrl+K` to find a document, use the arrow keys to choose a result, and press Enter to open it. To apply this style to an existing CLI project, run `pnpm exec varydocs add style desktop` from that project.
+
+Choose GTA6 for inked headlines, neon-pink navigation and a warm paper reading surface.
+
+## Use components in MDX
+
+Use registered components with literal props. Callout, Tabs, Tab, Steps, and Step come with the built-in themes.
+
+Use ordinary Markdown for prose. Use MDX to add an interactive block. Register custom components in the host application and refer to them by name in the document. The VaryDocs compiler accepts literal props and rejects imports and JavaScript expressions in content.
+
+<Tabs>
+<Tab title="Minimal">
+
+A compact example using the default documentation layout.
+
+</Tab>
+<Tab title="Editorial">
+
+The same component protocol works in a long-form reading layout.
+
+</Tab>
+</Tabs>
+
+<Steps>
+<Step title="Choose">
+
+Pick a style that matches the content.
+
+</Step>
+<Step title="Verify">
+
+Preview a long page, a short page, and the mobile navigation.
+
+</Step>
+</Steps>
+
+## Create your own layout
+
+Pass a theme object with an ID, a Layout component and a mapping of MDX components to the React renderer. The layout receives navigation, article and outline slots.
+
+For a custom top bar, supply a `Header` component on the theme. Render its `brand` and `actions` slots to keep the site's home link, search and host controls. The links in `context.groups` use the current language and deployment prefix.
+
+To load one built-in theme such as Retro Desktop, import `DocsView` from `@varydocs/react/view`, pass `desktopTheme` through `theme`, and import its stylesheet.
+
+```tsx
+import { DocsView } from '@varydocs/react/view';
+import { desktopTheme } from '@varydocs/react/themes/desktop';
+import '@varydocs/react/themes/desktop.css';
+```

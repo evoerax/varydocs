@@ -1,0 +1,24 @@
+.dt-shell[data-doc-theme="editorial"] {
+  --dt-bg: light-dark(#fbf8ef, #211e1b);
+  --dt-panel: light-dark(#f4eddf, #2e2822);
+  --dt-ink: light-dark(#2d241f, #f4ecdb);
+  --dt-muted: light-dark(#645447, #c4b5a2);
+  --dt-line: light-dark(#ddd0be, #53483c);
+  --dt-accent: light-dark(#8e3525, #f1a38c);
+  --dt-accent-soft: light-dark(#f2e4d5, #492f28);
+  --dt-code-bg: light-dark(#f1e8da, #312a23);
+  --dt-head: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --dt-radius: .125rem;
+}
+.dt-layout-editorial { grid-template-columns: minmax(9rem, .75fr) minmax(0, 3fr); max-width: 75rem; }
+.dt-editorial-content { min-width: 0; max-width: 48rem; }
+.dt-editorial-content > .dt-outline { border-left: 0; border-top: 1px solid var(--dt-line); border-bottom: 1px solid var(--dt-line); padding: .75rem 0; margin-bottom: 1.8rem; }
+.dt-editorial-content > .dt-outline ul { display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+.dt-editorial-content > .dt-outline li { margin: 0; padding: 0; }
+
+@media (max-width: 950px) {
+  .dt-layout-editorial { grid-template-columns: minmax(9rem, 1fr) minmax(0, 3fr); }
+}
+@media (max-width: 580px) {
+  .dt-layout-editorial { grid-template-columns: minmax(0, 1fr); }
+}

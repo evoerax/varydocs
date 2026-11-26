@@ -1,0 +1,33 @@
+---
+title: Get started
+description: Build a documentation site from Markdown and bring your own style.
+---
+
+## Create a project
+
+From a VaryDocs checkout, use Node.js 22.12 or newer and pnpm 10 to start the wizard.
+
+~~~bash
+pnpm install --frozen-lockfile
+pnpm create:local my-varydocs
+~~~
+
+Choose a template, style and language, then install dependencies through the wizard. Open the new directory and run the dev command it prints. See the [CLI guide](./cli.md#install-from-a-local-checkout) for local package options.
+
+<Callout title="One config file">
+
+Set the site name, navigation and style in `varydocs.json`.
+
+</Callout>
+
+## Write a page
+
+Add a Markdown or MDX file under `content/docs` with a title in its frontmatter. Use [the CLI guide](./cli.md) to create your own project.
+
+Use source-relative links such as `./guide/index.md#install` or `./guide/#install` to link to another document. The compiler checks headings inside MDX blocks such as Callout. For repeated “Install” headings, the first anchor is `#install`, the second is `#install-1`, and the third is `#install-2`. Link to host application routes with a leading slash, for example `/account/`.
+
+Put site images in `public/` and use a root-relative image path such as `/art/setup.webp` in Markdown. The compiler checks local image files, including URLs with a query or fragment. Use the same path for a subpath deployment; the reader adds the deployment prefix. External URLs and extensionless application image endpoints remain available.
+
+## Export the site
+
+Run `npm run build` from the generated project. The default template writes the static site to `out/`. If you enabled the [AI sidebar](./assistant.md), run `npm start` after building to serve the pages and the assistant endpoint together.

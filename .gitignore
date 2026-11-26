@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.next/
+out/
+.varydocs/
+.env
+.env.*
+!.env.example
+!.env.*.example
+.npmrc
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.taste-skill/
+.hallmark/

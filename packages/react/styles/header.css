@@ -1,0 +1,120 @@
+.dt-header.dt-header-default {
+  --dt-header-highlight: color-mix(in srgb, var(--dt-bg) 89%, var(--dt-accent));
+  display: block;
+  container: docs-header / inline-size;
+  min-block-size: 0;
+  padding: .7rem max(1.25rem, calc((100% - 85.5rem) / 2));
+}
+
+.dt-header-default .dt-header-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .5rem 1.25rem;
+}
+
+.dt-header-default[data-search] .dt-header-inner {
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, min(34%, 21rem)) minmax(0, 1fr);
+}
+
+.dt-header-default .dt-brand {
+  display: inline-flex;
+  justify-self: start;
+  align-items: center;
+  min-inline-size: 0;
+  gap: .6rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.dt-header-default .dt-brand-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: var(--dt-radius);
+  background: var(--dt-header-highlight);
+  color: var(--dt-accent);
+}
+
+.dt-header-default .dt-header-search {
+  min-inline-size: 0;
+}
+
+.dt-header-default .dt-search-button {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  min-block-size: 2.25rem;
+  gap: .45rem;
+  padding: .25rem .6rem;
+  background: var(--dt-panel);
+  text-align: start;
+}
+
+.dt-header-default .dt-search-button::before {
+  content: "";
+  flex: none;
+  inline-size: 1rem;
+  block-size: 1rem;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round'%3E%3Ccircle cx='10.8' cy='10.8' r='6.2'/%3E%3Cpath d='m15.4 15.4 4.1 4.1'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.dt-header-default .dt-search-button kbd {
+  flex: none;
+  margin: 0;
+  margin-inline-start: auto;
+  padding: .04rem .3rem;
+  border: 1px solid var(--dt-line);
+  border-radius: min(.25rem, var(--dt-radius));
+  background: var(--dt-bg);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.dt-header-default .dt-header-actions {
+  min-inline-size: 0;
+  gap: .3rem .55rem;
+}
+
+.dt-header-default .dt-header-languages a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.25rem;
+}
+
+.dt-header-default .vd-ai-trigger[type="button"] {
+  min-block-size: 2.25rem;
+  padding-inline: .55rem;
+  border-color: transparent;
+  background: var(--dt-header-highlight);
+  color: var(--dt-ink);
+}
+
+.dt-header-default .vd-ai-trigger[type="button"]:hover {
+  border-color: var(--dt-accent);
+}
+
+.dt-reader-sidebar-header .dt-header-default .dt-header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: .55rem;
+}
+
+@container docs-header (max-width: 42rem) {
+  .dt-header-default[data-search] .dt-header-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, auto);
+  }
+  .dt-header-default[data-search] .dt-brand { grid-column: 1 / -1; }
+  .dt-header-default .dt-search-button kbd { display: none; }
+}
+
+@container docs-header (max-width: 21rem) {
+  .dt-header-default .dt-header-inner { column-gap: .45rem; }
+  .dt-header-default .dt-header-actions { gap: .25rem; }
+  .dt-header-default .dt-search-button { padding-inline: .4rem; }
+}

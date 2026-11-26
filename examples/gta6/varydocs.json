@@ -1,0 +1,25 @@
+{
+  "name": "VaryDocs",
+  "style": "gta6",
+  "i18n": {
+    "defaultLocale": "en",
+    "locales": [
+      {
+        "id": "en", "label": "English",
+        "navigation": [
+          { "label": "Get started", "pages": ["index", "quick-start"] },
+          { "label": "Guides", "pages": ["writing-content"] },
+          { "label": "Reference", "pages": ["theme-api"] }
+        ]
+      },
+      {
+        "id": "zh-CN", "label": "简体中文",
+        "navigation": [
+          { "label": "入门", "pages": ["index", "quick-start"] },
+          { "label": "指南", "pages": ["writing-content"] },
+          { "label": "参考", "pages": ["theme-api"] }
+        ]
+      }
+    ]
+  }
+}

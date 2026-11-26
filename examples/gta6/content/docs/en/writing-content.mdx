@@ -1,0 +1,52 @@
+---
+title: Writing content
+description: Give each page a title, link to the next guide, and offer commands for more than one package manager.
+---
+
+## Frontmatter
+
+Use YAML at the top of a Markdown or MDX file. The title appears in navigation and the description appears below the page heading.
+
+```md
+---
+title: Deploy your site
+description: Build the site and upload its static files.
+---
+
+## Build
+```
+
+## Offer a command choice
+
+MDX pages can use the built-in Tabs component. Choose a package manager to see its build command.
+
+<Tabs>
+<Tab title="pnpm">
+
+```sh
+pnpm build
+```
+
+</Tab>
+<Tab title="npm">
+
+```sh
+npm run build
+```
+
+</Tab>
+</Tabs>
+
+## Add an illustration
+
+Save the file in `public/art/` and use its public path in Markdown. Describe what readers should notice in the brackets.
+
+```md
+![A lifeguard tower faces the sunset and the Art Deco buildings across the bay.](/art/gta6-bay.webp)
+```
+
+![A lifeguard tower faces the sunset and the Art Deco buildings across the bay.](/art/gta6-bay.webp)
+
+## Link to another guide
+
+Write a relative Markdown link to the source file, such as `[Quick start](./quick-start.md)`. VaryDocs turns it into a page link and checks the target when you build. Follow the [quick start](./quick-start.md) to try it.

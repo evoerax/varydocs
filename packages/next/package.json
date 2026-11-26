@@ -1,0 +1,53 @@
+{
+  "name": "@varydocs/next",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evoerax/varydocs.git",
+    "directory": "packages/next"
+  },
+  "bugs": {
+    "url": "https://github.com/evoerax/varydocs/issues"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./loader": {
+      "types": "./dist/loader.d.ts",
+      "import": "./dist/loader.js"
+    },
+    "./seo": {
+      "types": "./dist/seo.d.ts",
+      "import": "./dist/seo.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@varydocs/model": "workspace:*",
+    "@varydocs/react": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": "^16.0.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "next": "16.4.6",
+    "react": "19.2.8",
+    "@types/react": "^19.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,33 @@
+---
+title: 开始使用
+description: 用 Markdown 写文档，为站点选择自己的布局和风格。
+---
+
+## 创建文档站
+
+在本地 VaryDocs 源码目录使用 Node.js 22.12 或更新版本与 pnpm 10，然后启动向导。
+
+~~~bash
+pnpm install --frozen-lockfile
+pnpm create:local my-varydocs --lang zh-CN
+~~~
+
+在向导中选择模板、风格和文档语言，并安装依赖。进入新项目目录，运行向导提示的预览命令。[本地安装说明](./cli.md#安装本地包)
+
+<Callout title="统一配置">
+
+在 varydocs.json 里设置站点名称、导航与风格。
+
+</Callout>
+
+## 写一篇文档
+
+在 content/docs 下添加 Markdown 或 MDX 文件，并在文件开头的 frontmatter 中填写标题。要创建自己的站点，请查看[命令行指南](./cli.md)。
+
+链接到其他文档时，按源文件所在目录写相对路径，例如 `./guide/index.md#安装` 或 `./guide/#安装`。编译器也会处理 Callout 等 MDX 组件里的小节。标题「安装」第一次使用 `#安装`，第二次使用 `#安装-1`，第三次使用 `#安装-2`。指向宿主应用的页面可用以斜杠开头的路径，例如 `/account/`。
+
+将站点图片放在 `public/` 中，在 Markdown 里用 `/art/setup.webp` 一类的根路径引用。编译器会检查本地图片文件，也支持带查询参数或片段的图片地址。部署在子路径时，阅读器会自动补上部署前缀。图片也可以来自外部地址或应用提供的无扩展名接口。
+
+## 导出文档站
+
+在生成的项目中运行 `npm run build`，默认模板会把静态站点写入 `out/`。若已启用 [AI 侧边栏](./assistant.md)，构建后运行 `npm start`，即可同时提供文档页面和助手接口。

@@ -1,0 +1,32 @@
+---
+title: 简介
+description: 用 GTA6 主题搭建文档站，再用 Markdown 和 MDX 写下自己的内容。
+---
+
+## 阅读指南
+
+<nav aria-label="阅读指南">
+
+- [快速开始](./quick-start.md) — 创建双语站点。
+- [编写内容](./writing-content.mdx) — 添加第一篇指南。
+- [主题 API](./theme-api.md) — 把阅读器嵌入 React。
+
+</nav>
+
+<figure className="gta6-example-illustration">
+
+![两人倚在粉色敞篷车旁，身后是落日下的海湾。](/art/gta6-sunset.webp)
+
+</figure>
+
+## 试用阅读器
+
+在搜索框里输入“页首信息”，就能跳到介绍文档标题与描述的小节。点击页头的 English，可以阅读同一页的英文版。
+
+## 使用这款风格
+
+已有 VaryDocs CLI 项目时，在包含 `varydocs.json` 的目录中运行以下命令即可切换主题。
+
+```sh
+pnpm exec varydocs add style gta6
+```

@@ -1,0 +1,49 @@
+.dt-shell[data-doc-theme="blueprint"] {
+  --dt-bg: light-dark(#eff6ff, #123d86);
+  --dt-panel: light-dark(#dfedff, #164894);
+  --dt-ink: light-dark(#112e5a, #f5f9ff);
+  --dt-muted: light-dark(#3f5982, #c8defa);
+  --dt-line: light-dark(#99b6db, #648cc6);
+  --dt-accent: light-dark(#194c93, #f0faff);
+  --dt-accent-soft: light-dark(#d0e4ff, #235ba7);
+  --dt-code-bg: light-dark(#dfebf8, #113571);
+  --dt-radius: .12rem;
+  --blueprint-rule: light-dark(#234a8114, #b2d8ff15);
+  background-image: linear-gradient(var(--blueprint-rule) 1px, transparent 1px), linear-gradient(90deg, var(--blueprint-rule) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+}
+.dt-layout-blueprint { grid-template-columns: minmax(8rem, .8fr) minmax(0, 3fr) minmax(8rem, .8fr); }
+.dt-layout-blueprint .dt-page-header {
+  position: relative;
+  min-height: 6.3rem;
+  padding: 0 clamp(4.25rem, 9vw, 8rem) 1.7rem 0;
+  border-bottom: 1px solid var(--dt-line);
+}
+.dt-layout-blueprint .dt-page-header::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  width: clamp(3.6rem, 7vw, 6rem);
+  aspect-ratio: 1;
+  background: light-dark(#3e69a1, #badcff);
+  mask: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96' fill='none' stroke='%23badcff' stroke-width='1.2'%3E%3Cpath d='m47 5 36 17v49L47 92 12 73V23zM12 23l35 20 36-21M47 43v49'/%3E%3Cpath stroke-dasharray='3 3' d='M47 5v46L12 73m35-22 36 20'/%3E%3C/svg%3E");
+}
+.dt-layout-blueprint:dir(rtl) .dt-page-header { padding-inline: 0 clamp(4.25rem, 9vw, 8rem); }
+.dt-layout-blueprint .dt-page-header p { margin-bottom: 0; }
+.dt-layout-blueprint .dt-page-title { font-weight: 650; }
+.dt-layout-blueprint .dt-nav-group > p, .dt-layout-blueprint .dt-outline > p {
+  font: 600 .77rem/1.5 var(--dt-mono);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.dt-layout-blueprint .dt-nav-group [aria-current="page"] { border-inline-start: 2px solid var(--dt-accent); }
+.dt-layout-blueprint .dt-prose { background: var(--dt-bg); padding: .1rem clamp(.75rem, 2vw, 1.65rem) 1.3rem; margin-top: 1.5rem; border: 1px solid var(--dt-line); }
+@media (max-width: 1024px) {
+  .dt-layout-blueprint { grid-template-columns: minmax(9rem, .8fr) minmax(0, 3fr); }
+  .dt-layout-blueprint > .dt-outline { grid-column: 2; }
+}
+@media (max-width: 580px) {
+  .dt-layout-blueprint { grid-template-columns: minmax(0, 1fr); }
+  .dt-layout-blueprint > .dt-outline { grid-column: 1; }
+}

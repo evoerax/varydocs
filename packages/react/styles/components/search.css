@@ -1,0 +1,37 @@
+.dt-search-button, .dt-search-top button {
+  cursor: pointer;
+  border: 1px solid var(--dt-line, #dbe2eb);
+  color: var(--dt-muted, #526175);
+  background: var(--dt-bg, #fcfdfd);
+  border-radius: var(--dt-radius, .5rem);
+  padding: .25rem .55rem;
+  font-size: .875rem !important;
+}
+.dt-search-button:hover, .dt-search-top button:hover { color: var(--dt-accent, #223ed8); border-color: var(--dt-accent, #223ed8); }
+.dt-search-button kbd { font: inherit; font-size: .8em; margin-left: .45rem; }
+.dt-search {
+  width: min(34rem, calc(100% - 2rem));
+  max-height: min(34rem, calc(100% - 2rem));
+  padding: 1.1rem;
+  border: 1px solid var(--dt-line, #dbe2eb);
+  border-radius: var(--dt-radius, .5rem);
+  background: var(--dt-bg, #fcfdfd);
+  color: var(--dt-ink, #16202e);
+  box-shadow: var(--dt-shadow, 0 24px 90px rgb(17 31 59 / 20%));
+}
+.dt-search::backdrop { background: var(--dt-backdrop, rgb(19 27 46 / 42%)); }
+.dt-search-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: .65rem; font-weight: 700; }
+.dt-search input { width: 100%; padding: .65rem; background: var(--dt-bg, #fcfdfd); border: 1px solid var(--dt-line, #dbe2eb); border-radius: var(--dt-radius, .5rem); color: var(--dt-ink, #16202e); }
+.dt-search-results p { margin: .7rem 0 0; color: var(--dt-muted, #526175); }
+.dt-search-results .dt-search-keys { font-size: .8rem; }
+.dt-search-results ul { list-style: none; padding: 0; margin: .7rem 0 0; }
+.dt-search-results a { display: block; border-bottom: 1px solid var(--dt-line, #dbe2eb); padding: .4rem .5rem; text-decoration: none; }
+.dt-search-results a:hover, .dt-search-results a:focus-visible { background: var(--dt-accent-soft, #e9eeff); }
+.dt-search-results small { display: block; color: var(--dt-muted, #526175); }
+
+.dt-search, .dt-search * { box-sizing: border-box; }
+.dt-search-results a { color: inherit; }
+.dt-search-button:focus-visible, .dt-search :focus-visible {
+  outline: 2px solid var(--dt-accent, #223ed8);
+  outline-offset: 3px;
+}

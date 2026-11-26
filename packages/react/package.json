@@ -1,0 +1,131 @@
+{
+  "name": "@varydocs/react",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evoerax/varydocs.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/evoerax/varydocs/issues"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "files": [
+    "dist",
+    "styles.css",
+    "styles"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./styles.css",
+    "./view": {
+      "types": "./dist/view.d.ts",
+      "import": "./dist/view.js"
+    },
+    "./language": {
+      "types": "./dist/language.d.ts",
+      "import": "./dist/language.js"
+    },
+    "./components/appearance": {
+      "types": "./dist/components/appearance.d.ts",
+      "import": "./dist/components/appearance.js"
+    },
+    "./components/appearance.css": "./styles/components/appearance.css",
+    "./components/callout": {
+      "types": "./dist/components/callout.d.ts",
+      "import": "./dist/components/callout.js"
+    },
+    "./components/callout.css": "./styles/components/callout.css",
+    "./components/code-block": {
+      "types": "./dist/components/code-block.d.ts",
+      "import": "./dist/components/code-block.js"
+    },
+    "./components/code-block.css": "./styles/components/code-block.css",
+    "./components/copy-button": {
+      "types": "./dist/components/copy-button.d.ts",
+      "import": "./dist/components/copy-button.js"
+    },
+    "./components/copy-button.css": "./styles/components/copy-button.css",
+    "./components/search": {
+      "types": "./dist/components/search.d.ts",
+      "import": "./dist/components/search.js"
+    },
+    "./components/search.css": "./styles/components/search.css",
+    "./components/steps": {
+      "types": "./dist/components/steps.d.ts",
+      "import": "./dist/components/steps.js"
+    },
+    "./components/steps.css": "./styles/components/steps.css",
+    "./components/tabs": {
+      "types": "./dist/components/tabs.d.ts",
+      "import": "./dist/components/tabs.js"
+    },
+    "./components/tabs.css": "./styles/components/tabs.css",
+    "./themes/minimal": {
+      "types": "./dist/themes/minimal.d.ts",
+      "import": "./dist/themes/minimal.js"
+    },
+    "./themes/minimal.css": "./styles/themes/minimal.css",
+    "./themes/editorial": {
+      "types": "./dist/themes/editorial.d.ts",
+      "import": "./dist/themes/editorial.js"
+    },
+    "./themes/editorial.css": "./styles/themes/editorial.css",
+    "./themes/terminal": {
+      "types": "./dist/themes/terminal.d.ts",
+      "import": "./dist/themes/terminal.js"
+    },
+    "./themes/terminal.css": "./styles/themes/terminal.css",
+    "./themes/swiss": {
+      "types": "./dist/themes/swiss.d.ts",
+      "import": "./dist/themes/swiss.js"
+    },
+    "./themes/swiss.css": "./styles/themes/swiss.css",
+    "./themes/brutalism": {
+      "types": "./dist/themes/brutalism.d.ts",
+      "import": "./dist/themes/brutalism.js"
+    },
+    "./themes/brutalism.css": "./styles/themes/brutalism.css",
+    "./themes/blueprint": {
+      "types": "./dist/themes/blueprint.d.ts",
+      "import": "./dist/themes/blueprint.js"
+    },
+    "./themes/blueprint.css": "./styles/themes/blueprint.css",
+    "./themes/gta6": {
+      "types": "./dist/themes/gta6.d.ts",
+      "import": "./dist/themes/gta6.js"
+    },
+    "./themes/gta6.css": "./styles/themes/gta6.css",
+    "./themes/desktop": {
+      "types": "./dist/themes/desktop.d.ts",
+      "import": "./dist/themes/desktop.js"
+    },
+    "./themes/desktop.css": "./styles/themes/desktop.css"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@varydocs/model": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "react": "19.2.8",
+    "@types/react": "^19.2.0"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

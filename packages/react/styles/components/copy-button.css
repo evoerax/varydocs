@@ -1,0 +1,10 @@
+.dt-copy {
+  cursor: pointer;
+  border: 1px solid var(--dt-line, #dbe2eb);
+  color: var(--dt-muted, #526175);
+  background: var(--dt-bg, #fcfdfd);
+  border-radius: var(--dt-radius, .5rem);
+  padding: .25rem .55rem;
+  font-size: .875rem !important;
+}
+.dt-copy:hover { color: var(--dt-accent, #223ed8); border-color: var(--dt-accent, #223ed8); }

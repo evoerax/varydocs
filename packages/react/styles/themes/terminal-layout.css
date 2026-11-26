@@ -1,0 +1,32 @@
+.dt-shell[data-doc-theme="terminal"] {
+  --dt-bg: light-dark(#f3f8f1, #101a16);
+  --dt-panel: light-dark(#e5efe3, #17251d);
+  --dt-ink: light-dark(#18291e, #e5f7e9);
+  --dt-muted: light-dark(#425f4c, #a4bcae);
+  --dt-line: light-dark(#aabfaf, #304e3b);
+  --dt-accent: light-dark(#16623a, #b3fc95);
+  --dt-accent-soft: light-dark(#d6ead7, #223a29);
+  --dt-code-bg: light-dark(#e6efe7, #09130e);
+  --dt-font: var(--dt-mono);
+  --dt-radius: .125rem;
+}
+.dt-layout-terminal { grid-template-columns: minmax(10rem, .8fr) minmax(0, 3fr); }
+.dt-terminal-content {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(8rem, 13rem);
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid var(--dt-line);
+}
+.dt-shell[data-embedded="true"] .dt-terminal-content { grid-template-columns: minmax(0, 1fr); }
+.dt-shell[data-embedded="true"] .dt-terminal-content .dt-outline { display: none; }
+
+@media (max-width: 950px) {
+  .dt-layout-terminal { grid-template-columns: minmax(9rem, 1fr) minmax(0, 3fr); }
+  .dt-terminal-content { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 580px) {
+  .dt-layout-terminal { grid-template-columns: minmax(0, 1fr); }
+  .dt-terminal-content { padding: .85rem; }
+}
