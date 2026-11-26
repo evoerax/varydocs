@@ -5,7 +5,7 @@ description: 在终端选择模板、风格和文档语言，创建自己的文�
 
 ## 创建项目
 
-0.1.0 发布到 npm 后，从准备存放项目的目录启动交互向导。示例中的命令使用 npm。
+从准备存放项目的目录启动交互向导。示例中的命令使用 npm。
 
 ~~~bash
 npx @varydocs/cli@0.1.0 --lang zh-CN init my-varydocs --install

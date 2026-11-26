@@ -5,7 +5,7 @@ description: Pick a template and create a project in your terminal.
 
 ## Create a site
 
-Once 0.1.0 is available on npm, run the interactive wizard from the directory where you want to create a project. Choose npm to use the commands shown.
+Run the interactive wizard from the directory where you want to create a project. Choose npm to use the commands shown.
 
 ~~~bash
 npx @varydocs/cli@0.1.0 init my-varydocs --install

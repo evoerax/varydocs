@@ -1,73 +1,69 @@
-# VaryDocs
+<p align="center">
+  <img src="docs/brand/varydocs-readme-banner.webp" width="960" alt="VaryDocs 品牌横幅，标语为「一份内容，多种风格」。">
+</p>
 
-[English](README.md)
+<h1 align="center">为 React 和 Next.js 构建文档</h1>
 
-VaryDocs 是一套用于文档的开源 React 组件库。一篇 Markdown 或 MDX 可以交给不同的布局渲染。你可以在现有产品里只用一个标签页组件，也可以把一套内容做成带导航、搜索和多语言路由的独立文档站。
+<p align="center">VaryDocs 是一个开源文档工具包。用 Markdown 和 MDX 构建文档站，选择八种内置主题，使用搜索、多语言路由和可选 AI 助手。也可以在现有 React 应用中按需引入组件。</p>
 
-## 从哪里开始
+<p align="center">
+  <a href="#快速开始">快速开始</a> ·
+  <a href="#主题">主题</a> ·
+  <a href="#按需接入">按需接入</a> ·
+  <a href="#示例">示例</a> ·
+  <a href="README.md">English</a>
+</p>
 
-| 你要做什么 | 使用入口 | 可运行的参考 |
-| --- | --- | --- |
-| 在已有 React 页面加标签页、步骤或可复制的代码块 | 从 `@varydocs/react/components/<name>` 导入组件和对应 CSS | [React 接入指南](packages/core/docs/zh-CN/react.md) |
-| 在已有 React 应用里嵌入整本文档 | 用 `@varydocs/core` 在构建时编译内容，用 `@varydocs/react/view` 渲染当前页面和主题 | [完整 Vite 示例](examples/vite-embed/main.jsx) |
-| 给已有 Next.js 项目增加文档路由 | 用 Next.js 页面加载器接入 App Router 的静态参数、元数据和页面渲染，再为阅读器选择主题 | [单主题模板示例](packages/cli/templates/base/lib/docs.jsx) · [页面与搜索路由](packages/cli/templates/base/app) |
-| 从头建一个可以独立部署的站点 | 运行 CLI 向导，选择 Starter 或 Blank、风格和语言 | [CLI 指南](packages/core/docs/zh-CN/cli.md) |
+## 快速开始
 
-### 使用公开发行包
+使用 Node.js 22.12 或更高版本。在准备存放项目的目录执行以下命令，并在向导中选择 npm。
 
-使用 Node.js 22.12 或更高版本。下面的 npm 命令需要 0.1.0 已正式发布。也可以[直接从源码建站](#从本地源码运行)。
-
-~~~sh
+```sh
 npx @varydocs/cli@0.1.0 init my-varydocs --lang zh-CN --install
 cd my-varydocs
 npm run dev
-~~~
+```
 
-已有 React 19 项目只用 Tabs 时，安装 `npm install @varydocs/react@0.1.0`，再按下文示例导入组件和 CSS。Vite 嵌入整站时加装构建期的 `@varydocs/core`。发行验收使用 Node.js 22.12 起、pnpm 10、npm 10 或 11、React 19.2.8 和 Next.js 16.4.6。可选助手要求 React 19.2.1 以上的 19.x 版本。[贡献与问题反馈](CONTRIBUTING.md)
+**Starter** 内置三篇相互链接的文档和 MDX 示例，**Blank** 从一页 Markdown 开始。向导还可以选择主题、导航布局和文档语言。根据开发服务器打印的本地地址打开 `/docs/`。 [CLI 指南](packages/core/docs/zh-CN/cli.md) · [npm 安装包](https://www.npmjs.com/package/@varydocs/cli/v/0.1.0)
 
-### 从本地源码运行
+## 主题
 
-在仓库根目录使用 Node.js 22.12 或更高版本和 pnpm 10，即可运行双语 React 示例。
+下面是同一篇命令行指南的两种呈现方式。点击图片可查看原尺寸截图。
 
-~~~sh
-pnpm install --frozen-lockfile
-pnpm dev
-~~~
+<p align="center">
+  <a href="docs/screenshots/minimal-reader.webp"><img src="docs/screenshots/minimal-reader.webp" width="48%" align="top" alt="浅色 Minimal 阅读器，包含文档列表、顶部搜索栏和章节目录。"></a>
+  <a href="docs/screenshots/retro-desktop-reader.webp"><img src="docs/screenshots/retro-desktop-reader.webp" width="48%" align="top" alt="深色复古桌面阅读器，包含文件树和终端样式的代码块。"></a>
+</p>
 
-在仓库根目录运行 `pnpm dev:gta6`，可以体验 GTA6 主题的漫画标题、霓虹粉导航和暖纸色正文。双语示例在文章中展示了插画。[GTA6 示例](examples/gta6/README.md)
+- **Minimal** 用简洁的正文栏呈现指南，左右分别放置文档导航和章节目录。
+- **复古桌面** 用桌面窗口呈现正文和代码，提供文件树和键盘搜索。
 
-要创建新站，在已安装依赖的仓库根目录运行以下命令。默认模板会把示例文档放进生成项目，开发服务器会给出访问地址。
+CLI 提供 Minimal、Editorial、Terminal、Swiss、Brutalism、Blueprint、GTA6 和复古桌面八种主题。生成项目会打包所选主题及其样式。在现有项目目录可切换主题。
 
-~~~sh
-pnpm create:local my-varydocs --lang zh-CN --install
-cd my-varydocs
-npm run dev
-~~~
+```sh
+npm exec -- varydocs add style desktop
+```
 
-`--lang zh-CN` 设置向导语言。站点语言在向导里单独选择，支持英文、简体中文和双语。源码启动器会把本地 SDK 包放进生成项目的 `vendor/varydocs/`，移动项目时请带上这个目录。在新项目中运行 `npm run check` 校验内容与链接，运行 `npm run build` 导出可以静态托管的 `out/`。
+文档可沿用主题布局，也可以使用固定顶栏或左侧独立滚动的导航栏。主题默认跟随系统明暗模式，也可以在外观菜单手动选择并保存偏好。 [主题与布局指南](packages/core/docs/zh-CN/styling.mdx)
 
-## 开源交付范围
+## 按需接入
 
-这些包在同一个 pnpm monorepo 中开发，首版共用版本号。SDK、CLI、内置风格、模板、示例和随包发布的中英文开发指南使用 MIT 许可证。GTA6 主题随附的字体使用 SIL 开放字体许可证。官网的品牌素材、风格库和试玩界面由官网项目维护。开发者可以只靠本仓库完成编写、预览、构建和部署。[MIT 许可证](LICENSE)
-
-| 包 | 职责 |
+| 想做什么 | 使用入口 |
 | --- | --- |
-| `@varydocs/model` | 编译器和阅读器共享的清单类型、路径函数和内置主题标识。这个包没有运行时依赖。 |
-| `@varydocs/core` | 在构建时校验内容与文档内链接，按语言生成页面清单、目录、搜索数据和逐页加载的模块。浏览器端可从 `/model` 使用路径与数据模型。 |
-| `@varydocs/react` | 提供文档阅读器、可单独引入的组件与样式表，以及八种内置主题。现有项目可传入自己的布局和组件映射。 |
-| `@varydocs/next` | 把编译结果挂到现有 Next.js 16 App Router 应用，复用 React 阅读器。React 包与 Next.js 适配器的 React peer 版本均为 19。 |
-| `@varydocs/cli` | 提供交互式建站、内容校验、开发预览、构建和内置风格切换。Starter 包含示例页面，Blank 从一页 Markdown 开始。 |
-| `@varydocs/ai` | 可选的提问侧边栏与服务端接口，根据当前语言和页面检索本站文档，并返回可打开的来源。 |
+| 创建独立文档站 | [交互式 CLI](#快速开始) |
+| 给 React 应用加一个组件 | [组件和样式导入](#引入独立-react-组件) |
+| 给现有应用添加文档 | [Next.js App Router](#接入现有-nextjs-应用) · [Vite 示例](examples/vite-embed/) |
+| 支持提问、追问和章节跳转 | [AI 侧边栏](#添加-ai-侧边栏) |
 
-## 给文档加上 AI 侧边栏
+### 引入独立 React 组件
 
-在 `init` 建站命令中加入 `--assistant` 即可启用助手。从源码运行可用 `pnpm create:local my-varydocs --assistant --lang zh-CN --language bilingual --install`。读者可以从搜索旁打开助手，围绕当前页面提问、追问并跳到引用的小节。配置模型后，通过 Vercel AI SDK 流式回答。没有密钥时，仍可查阅相关文档摘录。启用助手的模板包含 Next.js 服务端接口。[配置模型与接入静态站点](packages/core/docs/zh-CN/assistant.md)
+在 React 19 项目安装 `@varydocs/react`，然后引入需要的组件和样式表。
 
-## 按需使用与扩展
+```sh
+npm install @varydocs/react@0.1.0
+```
 
-例如，给已有 React 项目加一组命令标签页，只需引入标签页入口和它的样式表。
-
-~~~tsx
+```tsx
 import { Tab, Tabs } from '@varydocs/react/components/tabs';
 import '@varydocs/react/components/tabs.css';
 
@@ -79,47 +75,127 @@ export function BuildCommands() {
     </Tabs>
   );
 }
-~~~
-
-七类组件入口是 `appearance`、`callout`、`tabs`、`steps`、`code-block`、`copy-button` 和 `search`。只使用一种风格时，从 `@varydocs/react/view` 引入阅读器，再导入对应主题及其 CSS。
-
-建站向导提供六种通用风格（Minimal、Editorial、Terminal、Swiss、Brutalism、Blueprint）和两种主题风格（GTA6、复古桌面）。复古桌面把侧栏文件树、文档搜索和代码块呈现为桌面窗口。在已有 CLI 项目中运行 `pnpm exec varydocs add style desktop` 即可切换。[单主题示例与自定义布局](packages/core/docs/zh-CN/styling.mdx)
-
-新建的 CLI 项目只打包当前风格的布局及其样式。若要给旧版全主题模板启用这项优化，先一并更新 SDK 和 CLI，再把新模板的主题导入和阅读器接入代码合并到自己的 `lib/docs.jsx` 中。[模板源码](packages/cli/templates/base/lib/docs.jsx)
-
-文档作者可以在 MDX 中使用已注册的组件和字面量属性。自定义组件的 JavaScript 写在宿主应用中，文档内的模块导入和 JavaScript 表达式会在编译时被拒绝。翻译文件分别放在各语言目录下，每种语言有自己的导航和搜索索引。[开始写文档](packages/core/docs/zh-CN/index.mdx)
-
-内置风格默认跟随系统浅色或深色。页头的外观控件也可手动选择并记住偏好。双语模板在页头提供当前文档的译文链接。从站点根路径进入时优先采用上次选择的语言，其次匹配浏览器语言。直接打开文档链接会保留该链接指定的语言。
-
-## 静态部署与旧模板升级
-
-静态站在构建时设置公开域名和部署前缀。将 `out/` 内的文件部署到对应路径，并让托管服务把缺失文件交给 `404.html`，返回 HTTP 404。配置域名后，页面会输出 canonical 和已有译文的 hreflang，站点地图位于该前缀下的 `sitemap.xml`。启用 AI 的整站使用 `npm run build` 和 `npm start`；静态前端可单独部署助手接口，密钥放在服务端。
-
-~~~sh
-VARYDOCS_SITE_URL=https://docs.example.com VARYDOCS_BASE_PATH=/product npm run build
-~~~
-
-从旧版单语 Starter 升级为双语时：
-
-1. 一起升级现有的 VaryDocs 依赖和开发依赖。如果项目由源码创建，用同一份源码重新打包并更新项目里的安装包和锁文件。
-2. 保留各页相对路径，将原正文移到 `content/docs/en/`，把中文首页及译文放到 `content/docs/zh-CN/`。在 `varydocs.json` 中增加 `i18n`，保留现有站点设置。
-3. 执行 `npm run check` 和 `npm run build`，检查两种语言首页和同路径译文。CLI 会为生成项目补齐缺失的语言路由。对自己改写过的首页和文档布局，按当前模板手动合并 SEO 导出。缺少翻译的页面会给出另一种语言的文档首页链接。
-
-如果项目已有 `app/[lang]` 之类的顶层动态路由，请将该参数统一为 `[locale]`，并同步修改代码里的 `params` 引用。自定义语言首页、文档路由或搜索路由时，把文件放在 `app/[locale]` 下对应的模板路径。Next.js 匹配 URL 时会忽略路由组目录，同一 URL 的两份路由文件会造成冲突。
-
-```json
-{ "defaultLocale": "en", "locales": [{ "id": "en", "label": "English" }, { "id": "zh-CN", "label": "简体中文" }] }
 ```
 
-上例是 `varydocs.json` 中 `i18n` 字段的值。
+Tabs 等独立组件无需安装 MDX 编译器。`appearance`、`callout`、`steps`、`code-block`、`copy-button` 和 `search` 也各有独立入口。
 
-## 本地验收
+需要完整的 React 阅读器时，用 `@varydocs/core` 编译文档，从 `@varydocs/react/view` 导入 `DocsView`，再导入选中的主题及其 CSS。阅读器支持自定义组件映射和搜索组件。 [React 接入指南](packages/core/docs/zh-CN/react.md)
 
-`pnpm test` 检查编译、CLI 和按需打包，`pnpm build` 构建 SDK 和 Vite 示例。安装 Python 3 后，以下命令会用本地发行包创建双语站点，依次构建 Swiss、GTA6、复古桌面和 Editorial，验证静态页面、主题字体、搜索索引和子路径部署。脚本也会检查示例插画没有进入 React 安装包和 CLI 站点，验证独立安装 Tabs，并通过本地 HTTP 检查 AI 助手的中英文摘录和章节链接。
+### 接入现有 Next.js 应用
 
-~~~sh
+在使用 React 19 的 Next.js 16 App Router 项目中，先编译内容，再把页面加载器接到所选主题的阅读器。适配器可提供页面静态参数和元数据。 [Next.js 适配器](packages/next/README.md) · [模板接入代码](packages/cli/templates/base/lib/docs.jsx) · [页面和搜索路由](packages/cli/templates/base/app/)
+
+如果旧模板导入了所有主题，先一起更新 SDK 和 CLI，再把当前模板的主题导入和阅读器接入代码合并到自己的 `lib/docs.jsx` 中。
+
+### 添加 AI 侧边栏
+
+```sh
+npx @varydocs/cli@0.1.0 init my-varydocs --lang zh-CN --assistant --install
+```
+
+读者可以围绕当前文档提问、跨页追问，并在会话保持打开时跳转到引用小节。
+
+<p align="center">
+  <a href="docs/screenshots/docs-assistant.webp"><img src="docs/screenshots/docs-assistant.webp" width="880" alt="Minimal 阅读器右侧的 AI 助手，回答正文中包含可以跳转到文档章节的引用链接。"></a>
+</p>
+
+配置模型后由 Vercel AI SDK 流式输出，未配置模型时可查阅相关摘录。已有应用可以用 `@varydocs/ai` 接入侧边栏和服务端处理器，支持 React 19.2.1 及以上的 React 19 版本。 [模型配置与静态站接入](packages/core/docs/zh-CN/assistant.md)
+
+## 编写文档与部署
+
+把 Markdown 和 MDX 放在 `content/docs/`，为每页设置 frontmatter 标题，以 `index.md` 或 `index.mdx` 作为文档首页。站内文档可通过相对路径和章节锚点链接，图片放在 `public/` 并通过根相对路径引用。
+
+在 `varydocs.json` 设置站点名称、导航和主题。MDX 支持 `Callout`、`Tabs`、`Steps` 等组件及字面量属性。自定义组件在宿主应用中注册，文档中的模块导入和 JavaScript 表达式会被编译器拒绝。 [写作指南](packages/core/docs/zh-CN/index.mdx)
+
+### 静态部署
+
+用 `npm run check` 校验文档、链接和多语言路由。构建静态站时设置公开域名和可选的部署前缀。
+
+```sh
+VARYDOCS_SITE_URL=https://docs.example.com VARYDOCS_BASE_PATH=/product npm run build
+```
+
+将 `out/` 部署到配置的路径，并让托管服务在页面缺失时返回导出的 `404.html` 和 HTTP 404。配置域名后，页面输出 canonical 和已有译文的 hreflang，并生成 `/product/sitemap.xml`。带 AI 助手的站点在 Next.js 服务端执行 `npm run build` 和 `npm start`。静态站也能连接独立部署的助手接口，模型密钥留在服务端。
+
+## 国际化
+
+阅读器和 CLI 内置英文和简体中文。用 `--lang zh-CN` 设置 CLI 界面语言，再通过 `--language en`、`--language zh-CN` 或 `--language bilingual` 独立选择站点语言。
+
+多语言项目把译文放在 `content/docs/<locale>/`，并在 `varydocs.json` 中声明语言。下例的英文路由是 `/docs/`，中文路由是 `/zh-CN/docs/`。
+
+```json
+{
+  "name": "My Docs",
+  "i18n": {
+    "defaultLocale": "en",
+    "locales": [
+      { "id": "en", "label": "English" },
+      { "id": "zh-CN", "label": "简体中文" }
+    ]
+  }
+}
+```
+
+保持各语言的源文件相对路径一致，读者就能直接切换到同一篇译文。站点根路径使用保存的语言或浏览器偏好，直接打开文档 URL 则使用该路径对应的语言。每种语言可设置独立的站点名和导航，并拥有自己的搜索索引。可通过 `DocsView` 的文案配置接入其他语言。
+
+### 将单语 Starter 升级为双语
+
+1. 一起升级项目的 VaryDocs 依赖和开发依赖。由源码创建的项目可从同一份源码重新打包，再更新安装包和锁文件。
+2. 在 `content/docs/en/` 保留原文相对路径，在 `content/docs/zh-CN/` 添加中文首页和译文，再添加上面的 `i18n` 配置。
+3. 运行 `npm run check` 和 `npm run build`，检查两种语言的首页和同路径译文。CLI 会补齐缺失的本地化路由。自定义的页面或布局可按当前模板合并 SEO 导出。
+
+如果项目已有顶层动态路由，请将参数统一为 `[locale]` 并更新代码里的 `params` 引用。自定义语言首页、文档和搜索路由应放在 `app/[locale]` 下对应的模板路径。缺少译文时，语言切换链接会指向目标语言的文档首页。
+
+## 示例
+
+在源码仓库根目录使用 Node.js 22.12 或更高版本和 pnpm 10。
+
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+| 示例 | 可以体验什么 |
+| --- | --- |
+| [Vite 嵌入](examples/vite-embed/) | `pnpm dev` 可预览 React 宿主中的双语导航、搜索和自定义 MDX 组件。`pnpm build` 将示例构建到 `examples/vite-embed/dist/`。 |
+| [GTA6 阅读器](examples/gta6/) | `pnpm dev:gta6` 可体验带霓虹色导航和文内插画的双语阅读器。 |
+
+### 从本地源码建站
+
+```sh
+pnpm create:local my-varydocs --lang zh-CN --template starter --style editorial \
+  --language bilingual --package-manager npm --yes --install
+cd my-varydocs
+npm run dev
+```
+
+需要交互向导时，运行 `pnpm create:local my-varydocs --lang zh-CN`。安装包会放在新项目的 `vendor/varydocs/`，移动项目时请保留该目录。
+
+## 开源包
+
+| 包 | 职责 |
+| --- | --- |
+| [`@varydocs/model`](packages/model/) | 无运行时依赖的文档清单类型、搜索与 URL 工具 |
+| [`@varydocs/core`](packages/core/) | 构建时校验内容，生成导航、章节、搜索数据和 MDX 模块 |
+| [`@varydocs/react`](packages/react/) | 文档阅读器、独立组件、主题和样式表 |
+| [`@varydocs/next`](packages/next/) | Next.js App Router 的页面路由、元数据和渲染接入 |
+| [`@varydocs/cli`](packages/cli/) | 交互式建站、预览、校验和构建 |
+| [`@varydocs/ai`](packages/ai/) | 可选的 React 问答侧栏和基于文档检索的服务端处理器 |
+
+## 发行验证
+
+使用 Node.js 22.12 或更高版本、pnpm 10 和 Python 3 运行验证。
+
+```sh
+pnpm test
+pnpm build
 pnpm pack:local
+pnpm check:pack
 node scripts/smoke-release.mjs
-~~~
+```
 
-`pnpm check:pack` 核对发行包的入口、依赖与字体许可。八种主题的键盘与无障碍测试、搜索网络请求、包体测量和千页构建基线见[本地发行验收记录](RELEASE-CHECKLIST.zh-CN.md)。
+发行测试会在部署前缀下构建双语项目，并依次切换 Swiss、GTA6、复古桌面和 Editorial，同时检查独立 Tabs、主题资源和双语助手引用。运行 `node scripts/smoke-release.mjs --registry` 可用 npm 上的安装包重新验证。 [发行验证记录](RELEASE-CHECKLIST.zh-CN.md) · [贡献与问题反馈](CONTRIBUTING.md)
+
+## 许可证
+
+VaryDocs 使用 [MIT 许可证](LICENSE)。GTA6 主题随附的字体使用 SIL 开放字体许可证。 [字体许可说明](packages/react/styles/assets/) · [VaryDocs 标识](docs/brand/varydocs-mark.svg)
