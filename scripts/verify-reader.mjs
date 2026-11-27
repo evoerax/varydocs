@@ -172,14 +172,18 @@ async function checkLayout(page, origin, theme, layout) {
   const label = theme + ' ' + layout;
   const url = origin + '/?theme=' + theme + '&layout=' + layout;
   const topbar = layout === 'topbar';
-  const chrome = page.locator(topbar ? '.dt-reader-topbar' : '.dt-reader-sidebar-header');
+  const shell = page.locator('.dt-shell');
+  const toolbar = shell.locator('.dt-reader-topbar');
+  const chrome = topbar ? toolbar : shell.locator('.dt-reader-sidebar-header');
   const menu = page.locator('.dt-desktop-menu');
+  const outline = !topbar && theme === 'minimal' ? shell.locator('.dt-outline') : null;
   await page.setViewportSize({ width: 1360, height: 900 });
   await page.goto(url);
   await chrome.waitFor();
+  await toolbar.waitFor();
   await page.evaluate(() => document.fonts.ready);
-  assert.equal(await page.locator('.dt-shell').getAttribute('data-doc-layout'), layout);
-  assert.equal(await page.locator('.dt-shell').getAttribute('data-doc-theme'), theme);
+  assert.equal(await shell.getAttribute('data-doc-layout'), layout);
+  assert.equal(await shell.getAttribute('data-doc-theme'), theme);
   if (layoutMarks[theme]) assert(await page.locator(layoutMarks[theme]).isVisible(), label + ' preserves its theme');
   if (topbar) {
     await page.waitForFunction(() => {
@@ -187,6 +191,18 @@ async function checkLayout(page, origin, theme, layout) {
       const size = Number.parseFloat(shell.style.getPropertyValue('--dt-reader-header-size'));
       return Math.abs(size - shell.querySelector('.dt-reader-topbar').getBoundingClientRect().height) <= 1;
     });
+  } else {
+    const actions = toolbar.locator('.dt-reader-sidebar-actions');
+    assert(await chrome.locator('.dt-brand').isVisible(), label + ' puts the brand on the rail');
+    assert(await chrome.locator('.dt-search-button').isVisible(), label + ' puts search on the rail');
+    assert.equal(await shell.locator('.dt-search-button').count(), 1, label + ' renders search once');
+    for (const control of ['.dt-appearance-trigger', '.vd-ai-trigger']) {
+      assert(await actions.locator(control).isVisible(), label + ' puts ' + control + ' on the main toolbar');
+      assert.equal(await shell.locator(control).count(), 1, label + ' renders ' + control + ' once');
+    }
+    const rail = await chrome.boundingBox();
+    const appearance = await actions.locator('.dt-appearance-trigger').boundingBox();
+    assert(appearance.x >= rail.x + rail.width - 1, label + ' keeps main controls to the right of the rail');
   }
 
   // Both rail layouts let the documentation list scroll without shifting the page or controls.
@@ -203,22 +219,59 @@ async function checkLayout(page, origin, theme, layout) {
   await page.waitForFunction(() => window.scrollY >= 500);
   const pinned = await chrome.boundingBox();
   assert(pinned.y >= -1 && pinned.y < 160, label + ' chrome stays visible as the article scrolls');
+  const pinnedToolbar = await toolbar.boundingBox();
+  assert(pinnedToolbar.y >= -1 && pinnedToolbar.y < 160, label + ' toolbar stays visible as the article scrolls');
+  const pinnedOutline = await outline?.boundingBox();
+  if (outline) assert(pinnedOutline && pinnedOutline.y >= -1 && pinnedOutline.y < 200, label + ' outline stays visible');
   await page.evaluate(() => window.scrollTo(0, 850));
   await page.waitForFunction(() => window.scrollY >= 800);
   assert(Math.abs((await chrome.boundingBox()).y - pinned.y) <= 1, label + ' chrome stays pinned');
+  assert(Math.abs((await toolbar.boundingBox()).y - pinnedToolbar.y) <= 1, label + ' toolbar stays pinned');
+  if (outline) assert(Math.abs((await outline.boundingBox()).y - pinnedOutline.y) <= 1, label + ' outline stays pinned');
   await page.screenshot({ path: join(artifacts, 'layout-' + layout + '-' + theme + '.png') });
 
-  async function followHash() {
-    const anchor = '安装步骤';
-    await page.evaluate(id => { location.hash = encodeURIComponent(id); }, anchor);
-    await page.waitForFunction(({ anchor, topbar }) => {
-      const heading = document.getElementById(anchor)?.getBoundingClientRect();
-      const edge = topbar ? document.querySelector('.dt-reader-topbar').getBoundingClientRect().bottom : 0;
+  const anchor = '安装步骤';
+  async function checkHashTarget() {
+    await page.waitForFunction(id => {
+      const heading = document.getElementById(id)?.getBoundingClientRect();
+      const edge = document.querySelector('.dt-reader-topbar')?.getBoundingClientRect().bottom ?? 0;
       return heading?.height > 0 && heading.top >= edge - 1 && heading.bottom < innerHeight;
-    }, { anchor, topbar });
+    }, anchor);
+    assert.equal(await page.getByRole('tab', { name: 'pnpm' }).getAttribute('aria-selected'), 'true', label + ' reveals hidden anchors');
   }
-  await followHash();
-  assert.equal(await page.getByRole('tab', { name: 'pnpm' }).getAttribute('aria-selected'), 'true', label + ' reveals hidden anchors');
+
+  async function followHash() {
+    await page.evaluate(id => { location.hash = encodeURIComponent(id); }, anchor);
+    await checkHashTarget();
+  }
+
+  if (outline) {
+    const active = outline.locator('a[aria-current="location"]');
+    async function checkActiveHeading(title) {
+      await active.filter({ hasText: title }).waitFor();
+      assert.equal(await active.count(), 1, label + ' marks one active heading');
+      assert.equal(await active.textContent(), title);
+    }
+
+    await outline.getByRole('link', { name: anchor, exact: true }).click();
+    await page.waitForURL(current => current.hash === '#' + encodeURIComponent(anchor));
+    await checkHashTarget();
+    await checkActiveHeading(anchor);
+
+    await page.reload();
+    await checkHashTarget();
+    await checkActiveHeading(anchor);
+
+    await page.evaluate(() => {
+      const heading = document.getElementById('部署参数');
+      const toolbar = document.querySelector('.dt-reader-topbar');
+      const offset = heading.getBoundingClientRect().top - toolbar.getBoundingClientRect().bottom;
+      window.scrollBy(0, offset + 1);
+    });
+    await checkActiveHeading('部署参数');
+  } else {
+    await followHash();
+  }
 
   if (theme === 'desktop') {
     await page.getByRole('button', { name: '问 AI' }).click();
@@ -351,6 +404,10 @@ try {
       await layouts.goto(origin + '/?theme=desktop&layout=' + layout);
       await layouts.getByRole('button', { name: '问 AI' }).waitFor();
       await layouts.locator('.dt-mobile-menu summary').waitFor();
+      if (layout === 'sidebar') {
+        assert(await layouts.locator('.dt-reader-sidebar-header .dt-search-button').isVisible());
+        assert(await layouts.locator('.dt-reader-sidebar-actions .dt-appearance-trigger').isVisible());
+      }
       assert(await layouts.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), layout + ' fits a narrow screen');
       console.log(layout + ' passed independent wheel scrolling, pinned controls, chapter links and docked AI checks');
     }

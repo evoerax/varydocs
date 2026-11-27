@@ -26,6 +26,8 @@ export interface DocTheme {
   id: string;
   Layout: ComponentType<LayoutSlots>;
   Header?: ComponentType<ThemeHeaderProps>;
+  /** In sidebar layout, receives the brand and search while the reader renders site actions on the right. */
+  SidebarHeader?: ComponentType<ThemeHeaderProps>;
   messages?: (locale: string) => Partial<DocMessages>;
   components: Record<string, ElementType>;
 }

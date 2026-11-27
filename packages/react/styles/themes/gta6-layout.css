@@ -197,8 +197,10 @@
 .dt-layout-gta6 .dt-prose h3 { font-size: 1.45rem; font-weight: 900; }
 .dt-layout-gta6 .dt-prose > :is(p, ol, ul) { max-width: 74ch; }
 .dt-layout-gta6 .dt-outline {
-  position: sticky;
-  top: 1rem;
+  position: var(--dt-reader-rail-position, sticky);
+  inset-block-start: var(--dt-reader-anchor-offset, 1rem);
+  max-block-size: var(--dt-reader-rail-limit, calc(100dvb - 2rem));
+  overflow: auto;
   align-self: start;
   margin-block: 2rem;
   padding: .25rem clamp(1rem, 2.3vw, 2.6rem);
@@ -207,7 +209,7 @@
 .dt-layout-gta6 .dt-outline > p { text-transform: uppercase; font: 900 1.4rem/1.25 var(--dt-head); }
 .dt-layout-gta6 .dt-outline li + li { margin-block-start: .55rem; }
 .dt-layout-gta6 .dt-outline a { color: var(--dt-ink); }
-.dt-layout-gta6 .dt-outline a:is(:hover, :focus-visible) { color: var(--dt-accent); }
+.dt-layout-gta6 .dt-outline a:is(:hover, :focus-visible, [aria-current="location"]) { color: var(--dt-accent); }
 .dt-layout-gta6 .dt-prose > nav > ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
@@ -269,7 +271,7 @@
 @container gta6-reader (max-width: 60rem) {
   .dt-gta6-header { gap: 1.2rem; }
   .dt-layout-gta6[data-outline] { grid-template-columns: 13rem minmax(0, 1fr); }
-  .dt-layout-gta6 .dt-outline { position: static; grid-column: 2; margin: 0 2rem 1.8rem; }
+  .dt-layout-gta6 .dt-outline { position: static; max-block-size: none; grid-column: 2; margin: 0 2rem 1.8rem; }
   .dt-layout-gta6[data-outline] .dt-sidebar { grid-row: 1 / span 2; }
 }
 @container gta6-reader (max-width: 55rem) {
@@ -302,10 +304,6 @@
 .dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-layout-gta6 .dt-sidebar {
   min-block-size: calc(100dvb - var(--dt-reader-toolbar-size));
   max-block-size: calc(100dvb - var(--dt-reader-toolbar-size));
-}
-
-.dt-shell[data-doc-layout="topbar"] .dt-layout-gta6 .dt-outline {
-  inset-block-start: var(--dt-reader-anchor-offset);
 }
 
 .dt-shell[data-doc-layout="sidebar"] .dt-layout-gta6 .dt-sidebar {

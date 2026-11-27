@@ -48,6 +48,7 @@ function DesktopCodeBlock(props: ComponentPropsWithoutRef<'pre'>) {
 export const desktopTheme = {
   id: 'desktop',
   Header: DesktopHeader,
+  SidebarHeader: DesktopHeader,
   Layout: DesktopLayout,
   messages: locale => isChinese(locale)
     ? { search: '查找文档', searchTitle: '查找文档' }

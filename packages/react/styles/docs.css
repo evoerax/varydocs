@@ -82,6 +82,7 @@
 .dt-nav-group a:hover, .dt-outline a:hover { color: var(--dt-accent); text-decoration: underline; }
 .dt-outline { border-left: 1px solid var(--dt-line); padding-left: 1rem; min-width: 0; }
 .dt-outline a { color: var(--dt-muted); text-decoration: none; overflow-wrap: anywhere; }
+.dt-outline a[aria-current="location"] { color: var(--dt-accent); font-weight: 700; }
 .dt-outline [data-level="3"], .dt-outline [data-level="4"] { padding-left: .65rem; }
 .dt-article { max-width: 48rem; min-width: 0; }
 .dt-page-title {

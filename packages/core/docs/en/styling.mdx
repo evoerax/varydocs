@@ -49,6 +49,8 @@ Pass a theme object with an ID, a Layout component and a mapping of MDX componen
 
 For a custom top bar, supply a `Header` component on the theme. Render its `brand` and `actions` slots to keep the site's home link, search and host controls. The links in `context.groups` use the current language and deployment prefix.
 
+For the split `sidebar` layout, supply a `SidebarHeader` component. Its `brand` slot links to the documentation home and its `actions` slot contains search. The reader places the host's `headerActions` and appearance menu in the right toolbar. A theme that supplies only `Header` keeps its combined header.
+
 To load one built-in theme such as Retro Desktop, import `DocsView` from `@varydocs/react/view`, pass `desktopTheme` through `theme`, and import its stylesheet.
 
 ```tsx

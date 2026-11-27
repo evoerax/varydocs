@@ -3,9 +3,13 @@
   --dt-reader-toolbar-size: 0px;
 }
 
-.dt-shell[data-doc-layout="topbar"] {
+.dt-shell:is([data-doc-layout="topbar"], [data-reader-sidebar-toolbar]) {
   --dt-reader-toolbar-size: var(--dt-reader-header-size, 4.1rem);
   --dt-reader-anchor-offset: calc(var(--dt-reader-toolbar-size) + 1rem);
+}
+
+.dt-shell[data-reader-sidebar-toolbar] {
+  --dt-reader-toolbar-size: var(--dt-reader-header-size, 3.25rem);
 }
 
 .dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]),
@@ -16,20 +20,26 @@
   --dt-reader-rail-display: flex;
 }
 
-.dt-shell[data-doc-layout="topbar"] > .dt-reader-topbar {
+.dt-shell:is([data-doc-layout="topbar"], [data-reader-sidebar-toolbar]) > .dt-reader-topbar {
   position: sticky;
   inset-block-start: 0;
   z-index: 20;
   background: var(--dt-bg);
 }
 
-.dt-shell[data-doc-layout="topbar"] :is(#doc-content, .dt-prose [id]) {
+.dt-shell:is([data-doc-layout="topbar"], [data-reader-sidebar-toolbar]) :is(#doc-content, .dt-prose [id]) {
   scroll-margin-block-start: var(--dt-reader-anchor-offset);
 }
 
-.dt-shell[data-doc-layout="topbar"] .dt-skip:focus {
+.dt-shell:is([data-doc-layout="topbar"], [data-reader-sidebar-toolbar]) .dt-skip:focus {
   position: fixed;
   z-index: 21;
+}
+
+.dt-reader-sidebar-actions {
+  min-block-size: 3.25rem;
+  padding: .375rem max(1.25rem, calc((100% - 85.5rem) / 2));
+  border-block-end: 1px solid var(--dt-line);
 }
 
 .dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-sidebar {
@@ -135,8 +145,8 @@
 }
 
 @media (max-height: 25rem) {
-  .dt-shell[data-doc-layout="topbar"] { --dt-reader-anchor-offset: 1rem; }
-  .dt-shell[data-doc-layout="topbar"] > .dt-reader-topbar { position: static; }
+  .dt-shell:is([data-doc-layout="topbar"], [data-reader-sidebar-toolbar]) { --dt-reader-anchor-offset: 1rem; }
+  .dt-shell:is([data-doc-layout="topbar"], [data-reader-sidebar-toolbar]) > .dt-reader-topbar { position: static; }
   .dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]),
   .dt-shell:is([data-doc-layout="topbar"], [data-doc-layout="sidebar"]) .dt-layout {
     --dt-reader-rail-position: static;

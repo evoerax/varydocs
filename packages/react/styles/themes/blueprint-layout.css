@@ -13,6 +13,12 @@
   background-size: 1.5rem 1.5rem;
 }
 .dt-layout-blueprint { grid-template-columns: minmax(8rem, .8fr) minmax(0, 3fr) minmax(8rem, .8fr); }
+.dt-layout-blueprint > .dt-outline {
+  position: var(--dt-reader-rail-position, sticky);
+  inset-block-start: var(--dt-reader-rail-start, 1rem);
+  max-block-size: var(--dt-reader-rail-limit, calc(100dvb - 2rem));
+  overflow: auto;
+}
 .dt-layout-blueprint .dt-page-header {
   position: relative;
   min-height: 6.3rem;
@@ -41,7 +47,7 @@
 .dt-layout-blueprint .dt-prose { background: var(--dt-bg); padding: .1rem clamp(.75rem, 2vw, 1.65rem) 1.3rem; margin-top: 1.5rem; border: 1px solid var(--dt-line); }
 @media (max-width: 1024px) {
   .dt-layout-blueprint { grid-template-columns: minmax(9rem, .8fr) minmax(0, 3fr); }
-  .dt-layout-blueprint > .dt-outline { grid-column: 2; }
+  .dt-layout-blueprint > .dt-outline { position: static; max-block-size: none; grid-column: 2; }
 }
 @media (max-width: 580px) {
   .dt-layout-blueprint { grid-template-columns: minmax(0, 1fr); }

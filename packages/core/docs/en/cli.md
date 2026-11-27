@@ -8,7 +8,7 @@ description: Pick a template and create a project in your terminal.
 Run the interactive wizard from the directory where you want to create a project. Choose npm to use the commands shown.
 
 ~~~bash
-npx @varydocs/cli@0.1.0 init my-varydocs --install
+npx @varydocs/cli@0.1.1 init my-varydocs --install
 cd my-varydocs
 npm run dev
 ~~~
@@ -55,6 +55,8 @@ The `layout` field in `varydocs.json` controls where navigation and site control
 
 - `theme` follows the theme's own layout and is the default.
 - `topbar` keeps the site controls visible across the top, with page navigation beside the article.
-- `sidebar` puts the site controls above an independently scrolling page list on the left.
+- `sidebar` keeps the site name and search above the independently scrolling page list on the left. Appearance and any enabled language or assistant controls sit at the top right.
+
+The outline highlights the current section as you scroll or follow a chapter link. Themes with a right-hand outline, such as Minimal, keep it visible beside the article on desktop.
 
 Set the same value with `varydocs init --layout` when creating a project.

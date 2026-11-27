@@ -19,12 +19,12 @@
 Use Node.js 22.12 or later. Run these commands in the directory where you want to create your project and choose npm in the wizard.
 
 ```sh
-npx @varydocs/cli@0.1.0 init my-varydocs --install
+npx @varydocs/cli@0.1.1 init my-varydocs --install
 cd my-varydocs
 npm run dev
 ```
 
-Choose **Starter** for three linked pages with MDX examples or **Blank** for a single Markdown page. The wizard also lets you pick a theme, navigation layout, and site language. Open `/docs/` on the local URL printed by the dev server. [CLI guide](packages/core/docs/en/cli.md) · [npm package](https://www.npmjs.com/package/@varydocs/cli/v/0.1.0)
+Choose **Starter** for three linked pages with MDX examples or **Blank** for a single Markdown page. The wizard also lets you pick a theme, navigation layout, and site language. Open `/docs/` on the local URL printed by the dev server. [CLI guide](packages/core/docs/en/cli.md) · [npm package](https://www.npmjs.com/package/@varydocs/cli/v/0.1.1)
 
 ## Themes
 
@@ -46,6 +46,8 @@ npm exec -- varydocs add style desktop
 
 Choose the theme's own navigation layout, a fixed top bar, or a left rail with independently scrolling navigation. Themes follow your system light or dark preference and provide a menu for a saved manual choice. [Theme and layout guide](packages/core/docs/en/styling.mdx)
 
+The left-rail layout keeps the site name and search above the page list, with appearance and any language or assistant controls at the top right. On desktop, the Minimal outline stays visible and highlights the current section.
+
 ## Building blocks
 
 | Goal | Entry point |
@@ -60,7 +62,7 @@ Choose the theme's own navigation layout, a fixed top bar, or a left rail with i
 Install `@varydocs/react` in a React 19 project, then import just the component and its stylesheet.
 
 ```sh
-npm install @varydocs/react@0.1.0
+npm install @varydocs/react@0.1.1
 ```
 
 ```tsx
@@ -90,7 +92,7 @@ To upgrade an older template that imports all themes, update the SDK and CLI tog
 ### Add an AI sidebar
 
 ```sh
-npx @varydocs/cli@0.1.0 init my-varydocs --assistant --install
+npx @varydocs/cli@0.1.1 init my-varydocs --assistant --install
 ```
 
 Readers can ask about the current page, follow up across pages, and open cited sections while the conversation stays open.

@@ -86,6 +86,32 @@ test('the GTA6 header uses the host brand, localized routes, search and header a
   assert(html.includes('id="doc-content"') && html.includes('文档正文'));
 });
 
+test('a custom theme can opt into a split sidebar without changing legacy headers', async () => {
+  const { createElement } = fromExample('react');
+  const { renderToStaticMarkup } = fromExample('react-dom/server');
+  const { DocsView } = await import('../packages/react/dist/view.js');
+  const { minimalTheme } = await import('../packages/react/dist/themes/minimal.js');
+  const page = { id: 'index', slug: [], title: 'Start', headings: [] };
+  const manifest = { name: 'Example', pages: [page], navigation: [{ label: 'Guide', pages: ['index'] }] };
+  const Header = ({ brand, actions }) => createElement('header', { 'data-custom-header': '' }, brand, actions);
+  const render = theme => renderToStaticMarkup(createElement(DocsView, {
+    page, manifest, layout: 'sidebar', theme, Body: () => 'Documentation',
+    Search: () => createElement('button', null, 'Find content'), searchDocuments: [],
+    headerActions: createElement('a', { href: '/zh-CN/docs/' }, '简体中文'),
+  }));
+  const customHeader = html => html.match(/<header data-custom-header="">([\s\S]*?)<\/header>/u)?.[1];
+
+  const legacy = render({ ...minimalTheme, Header });
+  assert.match(customHeader(legacy), /Find content.*简体中文/u);
+  assert.doesNotMatch(legacy, /dt-reader-sidebar-actions/u);
+
+  const split = render({ ...minimalTheme, Header, SidebarHeader: Header });
+  assert.match(customHeader(split), /Example.*Find content/u);
+  assert.doesNotMatch(customHeader(split), /简体中文/u);
+  assert.match(split, /dt-reader-sidebar-actions[^>]*>[\s\S]*?简体中文/u);
+  assert.equal((split.match(/data-appearance=/gu) ?? []).length, 1);
+});
+
 test('desktop and mobile document navigation use the host link component', async () => {
   const { createElement } = fromExample('react');
   const { renderToStaticMarkup } = fromExample('react-dom/server');

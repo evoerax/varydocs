@@ -33,4 +33,6 @@ function Gta6Layout({ navigation, article, outline, context }: LayoutSlots) {
   </div>;
 }
 
-export const gta6Theme = { id: 'gta6', Header: Gta6Header, Layout: Gta6Layout, components: standardComponents } satisfies DocTheme;
+export const gta6Theme = {
+  id: 'gta6', Header: Gta6Header, SidebarHeader: Gta6Header, Layout: Gta6Layout, components: standardComponents,
+} satisfies DocTheme;

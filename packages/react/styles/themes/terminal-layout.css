@@ -19,12 +19,20 @@
   padding: 1.5rem;
   border: 1px solid var(--dt-line);
 }
+.dt-terminal-content > .dt-outline {
+  align-self: start;
+  position: var(--dt-reader-rail-position, sticky);
+  inset-block-start: var(--dt-reader-rail-start, 1rem);
+  max-block-size: var(--dt-reader-rail-limit, calc(100dvb - 2rem));
+  overflow: auto;
+}
 .dt-shell[data-embedded="true"] .dt-terminal-content { grid-template-columns: minmax(0, 1fr); }
 .dt-shell[data-embedded="true"] .dt-terminal-content .dt-outline { display: none; }
 
 @media (max-width: 950px) {
   .dt-layout-terminal { grid-template-columns: minmax(9rem, 1fr) minmax(0, 3fr); }
   .dt-terminal-content { grid-template-columns: minmax(0, 1fr); }
+  .dt-terminal-content > .dt-outline { position: static; max-block-size: none; }
 }
 @media (max-width: 580px) {
   .dt-layout-terminal { grid-template-columns: minmax(0, 1fr); }

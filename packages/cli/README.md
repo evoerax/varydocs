@@ -4,10 +4,10 @@ Create a Next.js documentation site with the interactive wizard. Use Node.js 22.
 
 ## Create a site with npm
 
-These commands require the public 0.1.0 release. Choose npm in the wizard to use the commands shown.
+Choose npm in the wizard to use the commands shown.
 
 ~~~sh
-npx @varydocs/cli@0.1.0 init my-varydocs --install
+npx @varydocs/cli@0.1.1 init my-varydocs --install
 cd my-varydocs
 npm run dev
 ~~~

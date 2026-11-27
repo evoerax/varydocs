@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef, ComponentType, ElementType, ReactNode, R
 import { pagePath } from '@varydocs/model';
 import type { DocLayout, DocManifest, DocPage, SearchDocument } from '@varydocs/model';
 import { AppearanceSelect } from './components/appearance.js';
+import { ReaderOutline } from './components/reader-outline.js';
 import { ReaderTopbar } from './components/reader-topbar.js';
 import { DocsLanguage } from './language.js';
 import { getMessages } from './messages.js';
@@ -42,8 +43,10 @@ export function DocsView({
   manifest, page, Body, mount = '/docs', assetBase = '', theme, layout, Search, headerActions, components, Link,
   searchIndex, searchDocuments, embedded = false, messages: overrides,
 }: DocsViewProps) {
-  const { Layout, Header } = theme;
+  const { Layout, Header, SidebarHeader } = theme;
   const readerLayout = embedded ? 'theme' : layout ?? manifest.layout ?? 'theme';
+  const splitSidebar = readerLayout === 'sidebar' && (!Header || Boolean(SidebarHeader));
+  const ReaderHeader = splitSidebar ? SidebarHeader : Header;
   const locale = manifest.locale ?? 'en';
   const messages = getMessages(locale, { ...theme.messages?.(locale), ...overrides });
   const PageHeading = embedded ? 'h2' : 'h1';
@@ -82,13 +85,13 @@ export function DocsView({
   };
 
   const brand = <SiteLink className="dt-brand" href={root}>
-    {!Header && <span className="dt-brand-mark" aria-hidden="true">
+    {!ReaderHeader && <span className="dt-brand-mark" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65"
         strokeLinecap="round" strokeLinejoin="round" focusable="false">
         <path d="M9 3.5h7l4 4v9h-11z M16 3.5v4h4M12 11h5m-5 2.75h3 M5 7.5v13h11" />
       </svg>
     </span>}
-    {Header ? manifest.name : <bdi>{manifest.name}</bdi>}
+    {ReaderHeader ? manifest.name : <bdi>{manifest.name}</bdi>}
   </SiteLink>;
   const search = Search && (searchIndex || searchDocuments) ?
     <Search indexUrl={searchIndex} documents={searchDocuments} hrefs={hrefs} /> : null;
@@ -96,12 +99,12 @@ export function DocsView({
     {headerActions}
     <AppearanceSelect locale={locale} labels={messages.appearance} />
   </>;
-  const header = Header ? <Header brand={brand} actions={<>{search}{actions}</>} context={context} /> :
+  const header = ReaderHeader ? <ReaderHeader brand={brand} actions={splitSidebar ? search : <>{search}{actions}</>} context={context} /> :
     <header className="dt-header dt-header-default" data-search={search ? '' : undefined}>
       <div className="dt-header-inner">
         {brand}
         {search && <div className="dt-header-search">{search}</div>}
-        <div className="dt-header-actions">{actions}</div>
+        {!splitSidebar && <div className="dt-header-actions">{actions}</div>}
       </div>
     </header>;
   const navigation = <aside className="dt-sidebar">
@@ -114,12 +117,8 @@ export function DocsView({
       <Navigation groups={groups} pageId={page.id} label={messages.navigation} Link={SiteLink} />
     </div>
   </aside>;
-  const outline = page.headings.length ? <nav className="dt-outline" aria-label={messages.outline}>
-    <p>{messages.outline}</p>
-    <ul>{page.headings.map(heading => <li key={heading.id} data-level={heading.level}>
-      <a href={'#' + encodeURIComponent(heading.id)}>{heading.title}</a>
-    </li>)}</ul>
-  </nav> : null;
+  const outline = page.headings.length ?
+    <ReaderOutline headings={page.headings} label={messages.outline} track={!embedded} /> : null;
   const article = <article className="dt-article" id="doc-content" tabIndex={embedded ? undefined : -1}>
     <header className="dt-page-header">
       <PageHeading className="dt-page-title">{page.title}</PageHeading>
@@ -135,10 +134,14 @@ export function DocsView({
   </article>;
 
   return <DocsLanguage locale={locale} messages={messages}><div className="dt-shell" data-doc-theme={theme.id}
-    data-doc-layout={readerLayout} data-embedded={embedded} lang={locale} dir={manifest.dir ?? 'ltr'}>
+    data-doc-layout={readerLayout} data-embedded={embedded} data-reader-sidebar-toolbar={splitSidebar ? '' : undefined}
+    lang={locale} dir={manifest.dir ?? 'ltr'}>
     {!embedded && <a href="#doc-content" className="dt-skip">{messages.skip}</a>}
     {readerLayout === 'theme' && header}
     {readerLayout === 'topbar' && <ReaderTopbar>{header}</ReaderTopbar>}
+    {splitSidebar && <ReaderTopbar>
+      <header className="dt-reader-sidebar-actions dt-header-actions">{actions}</header>
+    </ReaderTopbar>}
     <Layout navigation={navigation} article={article} outline={outline} context={context} />
   </div></DocsLanguage>;
 }

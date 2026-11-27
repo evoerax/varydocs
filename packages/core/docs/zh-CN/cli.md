@@ -8,7 +8,7 @@ description: 在终端选择模板、风格和文档语言，创建自己的文�
 从准备存放项目的目录启动交互向导。示例中的命令使用 npm。
 
 ~~~bash
-npx @varydocs/cli@0.1.0 --lang zh-CN init my-varydocs --install
+npx @varydocs/cli@0.1.1 --lang zh-CN init my-varydocs --install
 cd my-varydocs
 npm run dev
 ~~~
@@ -52,6 +52,8 @@ pnpm exec varydocs add style swiss
 
 - `theme` 是默认值，沿用所选主题原有的布局。
 - `topbar` 将站点操作固定在顶部，文档导航放在正文旁。
-- `sidebar` 将站点操作固定在左栏上方，下方的页面列表独立滚动。
+- `sidebar` 将站点名称和搜索固定在左栏上方，文档列表独立滚动。外观、语言和已启用的 AI 助手入口位于右上角。
+
+滚动正文或打开章节链接时，目录会高亮对应章节。Minimal 等带右侧章节目录的主题在桌面端会将目录固定在正文旁。
 
 创建项目时也可以通过 `varydocs init --layout` 选择布局。

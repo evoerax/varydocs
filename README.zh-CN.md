@@ -19,12 +19,12 @@
 使用 Node.js 22.12 或更高版本。在准备存放项目的目录执行以下命令，并在向导中选择 npm。
 
 ```sh
-npx @varydocs/cli@0.1.0 init my-varydocs --lang zh-CN --install
+npx @varydocs/cli@0.1.1 init my-varydocs --lang zh-CN --install
 cd my-varydocs
 npm run dev
 ```
 
-**Starter** 内置三篇相互链接的文档和 MDX 示例，**Blank** 从一页 Markdown 开始。向导还可以选择主题、导航布局和文档语言。根据开发服务器打印的本地地址打开 `/docs/`。 [CLI 指南](packages/core/docs/zh-CN/cli.md) · [npm 安装包](https://www.npmjs.com/package/@varydocs/cli/v/0.1.0)
+**Starter** 内置三篇相互链接的文档和 MDX 示例，**Blank** 从一页 Markdown 开始。向导还可以选择主题、导航布局和文档语言。根据开发服务器打印的本地地址打开 `/docs/`。 [CLI 指南](packages/core/docs/zh-CN/cli.md) · [npm 安装包](https://www.npmjs.com/package/@varydocs/cli/v/0.1.1)
 
 ## 主题
 
@@ -46,6 +46,8 @@ npm exec -- varydocs add style desktop
 
 文档可沿用主题布局，也可以使用固定顶栏或左侧独立滚动的导航栏。主题默认跟随系统明暗模式，也可以在外观菜单手动选择并保存偏好。 [主题与布局指南](packages/core/docs/zh-CN/styling.mdx)
 
+左栏布局将站点名称和搜索固定在文档列表上方，外观、语言和已启用的 AI 助手入口位于右上角。Minimal 的桌面章节目录会随阅读保持可见，并高亮当前章节。
+
 ## 按需接入
 
 | 想做什么 | 使用入口 |
@@ -60,7 +62,7 @@ npm exec -- varydocs add style desktop
 在 React 19 项目安装 `@varydocs/react`，然后引入需要的组件和样式表。
 
 ```sh
-npm install @varydocs/react@0.1.0
+npm install @varydocs/react@0.1.1
 ```
 
 ```tsx
@@ -90,7 +92,7 @@ Tabs 等独立组件无需安装 MDX 编译器。`appearance`、`callout`、`ste
 ### 添加 AI 侧边栏
 
 ```sh
-npx @varydocs/cli@0.1.0 init my-varydocs --lang zh-CN --assistant --install
+npx @varydocs/cli@0.1.1 init my-varydocs --lang zh-CN --assistant --install
 ```
 
 读者可以围绕当前文档提问、跨页追问，并在会话保持打开时跳转到引用小节。

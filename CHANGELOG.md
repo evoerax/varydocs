@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Put branding and search above the independently scrolling navigation in the built-in sidebar layout. Show appearance, language, and other configured site actions at the top right.
+- Keep right-hand desktop outlines visible beside the article and highlight the current section when scrolling or following chapter links.
+
 ## 0.1.0
 
 - Enable rate limiting and structured AI usage and feedback logs in CLI-generated assistant sites. Readers can rate a reply in the sidebar.

@@ -49,6 +49,8 @@ description: 为同一份内容选择布局，并用文档组件组织页面。
 
 要自定义顶栏，可以给主题提供 `Header` 组件。在顶栏中渲染 `brand` 和 `actions`，即可保留站点首页链接、搜索和宿主应用传入的操作。`context.groups` 提供当前语言的导航链接，包含站点的部署路径前缀。
 
+要在 `sidebar` 布局中分开左右工具区，可以给主题提供 `SidebarHeader`。它的 `brand` 渲染文档首页链接，`actions` 渲染搜索。宿主通过 `headerActions` 传入的操作会与外观菜单一起显示在右上角。仅提供 `Header` 的主题仍使用原有的组合头部。
+
 以复古桌面为例，只加载一种内置主题时，从 `@varydocs/react/view` 引入 `DocsView`，把 `desktopTheme` 传给 `theme`，并引入对应样式。
 
 ```tsx
